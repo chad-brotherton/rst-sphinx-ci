@@ -1,0 +1,279 @@
+# Questions a reader might ask about USD Scene Inspector, each with a reference
+# answer written from the docs. evals/run_evals.py asks a model each question with
+# llms-full.txt as context, and a judge compares the answer with the reference.
+#
+# tags[0] groups the results in SUMMARY.md. "seed" marks the maintainer's own
+# questions. "not-in-docs" marks questions the docs don't answer: the right answer
+# is to say so, not to guess. Several other questions are only partly answered by
+# the docs, so a good answer says where the docs stop.
+
+# --- Installation -----------------------------------------------------------
+
+[[case]]
+id = "install-requirements"
+tags = ["install", "seed"]
+question = "What are all of the requirements and dependencies I need to install the tool?"
+reference = """
+Python 3.11 or later, and Pixar's usd-core package, which the tool depends on and which
+publishes wheels for Python 3.11 through 3.14 on macOS, Linux, and Windows. You clone the
+repository with git, create and activate a virtual environment, and run pip install -e .
+To build the docs or run the tests, you also install the docs and test extras:
+pip install -e ".[docs,test]". The docs don't list any other requirements.
+"""
+
+[[case]]
+id = "install-windows"
+tags = ["install"]
+question = "Can I install it on Windows? Is anything different from macOS?"
+reference = """
+Yes. usd-core publishes wheels for Windows. The steps differ only in the virtual environment
+commands: in PowerShell, run py -m venv .venv and .venv\\Scripts\\Activate.ps1 instead of
+python3 -m venv .venv and source .venv/bin/activate. Then run pip install -e . as on macOS
+and Linux.
+"""
+
+# --- Python API -------------------------------------------------------------
+
+[[case]]
+id = "api-format"
+tags = ["api", "seed"]
+question = "What format is the API? REST?"
+reference = """
+It's a Python API, not REST: you import functions from the usd_inspect package, such as
+open_stage, list_prims, list_attributes, and find_missing_assets, and they return Python
+objects. There's also the usd-inspect command-line tool. The docs don't describe a REST or
+HTTP API.
+"""
+
+[[case]]
+id = "api-open-missing-file"
+tags = ["api"]
+question = "What happens if I call open_stage on a file that doesn't exist?"
+reference = """
+It raises FileNotFoundError. If the file exists but USD can't read it, open_stage raises
+ValueError.
+"""
+
+[[case]]
+id = "api-attributes-defaults"
+tags = ["api"]
+question = "Why doesn't list_attributes show my sphere's visibility attribute?"
+reference = """
+list_attributes lists only attributes that are authored, meaning written in the scene.
+An attribute that only has its schema's default value, such as a sphere's visibility,
+isn't included.
+"""
+
+[[case]]
+id = "api-missing-asset-fields"
+tags = ["api"]
+question = "What does find_missing_assets tell me about each missing file?"
+reference = """
+It returns a list of MissingAsset results, one per missing file, in prim order. Each has
+prim_path (the prim with the reference or payload), arc ("reference" or "payload"), and
+asset_path (the path as it's written in the scene). The list is empty if every file is found.
+"""
+
+[[case]]
+id = "api-time-samples"
+tags = ["api"]
+question = "Can list_attributes give me an attribute's value at frame 24?"
+reference = """
+No. list_attributes returns each attribute's value at the default time. The docs don't
+describe a way to read values at another time or frame.
+"""
+
+[[case]]
+id = "api-payloads-loaded"
+tags = ["api"]
+question = "Does open_stage load payloads, or leave them unloaded?"
+reference = "open_stage loads all payloads."
+
+# --- Command line -----------------------------------------------------------
+
+[[case]]
+id = "cli-list-prims"
+tags = ["cli"]
+question = "How do I list every prim in a scene from the command line?"
+reference = """
+Run usd-inspect with the file, for example usd-inspect examples/scenes/simple.usda. It
+prints each prim's path and type.
+"""
+
+[[case]]
+id = "cli-ci-gate"
+tags = ["cli"]
+question = "How can I make a CI job fail when a scene has a broken reference?"
+reference = """
+Run usd-inspect FILE --check. It exits with status 1 when a reference or payload points to a
+missing file, which fails the job, and with status 0 when every file is found.
+"""
+
+[[case]]
+id = "cli-combine-options"
+tags = ["cli"]
+question = "Can I use --check and --prim in the same command?"
+reference = "No. --check can't be combined with --prim."
+
+[[case]]
+id = "cli-json-output"
+tags = ["cli"]
+question = "Can usd-inspect print its results as JSON?"
+reference = """
+The docs don't describe a JSON option. The documented options are the file, --prim,
+--check, --version, and -h/--help, and the output shown is plain text in columns.
+"""
+
+[[case]]
+id = "cli-exit-2"
+tags = ["cli"]
+question = "What does exit status 2 from usd-inspect mean?"
+reference = """
+The arguments are invalid, the file doesn't exist or isn't a USD file, or no prim exists at
+the --prim path.
+"""
+
+# --- USD concepts -----------------------------------------------------------
+
+[[case]]
+id = "concepts-payload-vs-reference"
+tags = ["concepts"]
+question = "What's the difference between a reference and a payload?"
+reference = """
+Both are composition arcs that bring content from another layer into a prim. A payload works
+like a reference, but you can leave it unloaded, so you can open a large scene without
+reading every file it points to.
+"""
+
+[[case]]
+id = "concepts-relative-asset-path"
+tags = ["concepts"]
+question = "A reference uses the path ./props/crate.usda. What is that path relative to?"
+reference = """
+The layer (file) that contains the reference, not your current folder.
+"""
+
+[[case]]
+id = "concepts-default-prim"
+tags = ["concepts"]
+question = "What is a default prim, and why does it matter?"
+reference = """
+It's the prim a layer names as its entry point. When another file references the layer
+without naming a prim, USD uses the default prim.
+"""
+
+# --- What --check doesn't cover ---------------------------------------------
+
+[[case]]
+id = "limits-texture"
+tags = ["limits"]
+question = "Will usd-inspect --check catch a missing texture file?"
+reference = """
+No. --check only checks the files named by references and payloads. A file path stored in an
+attribute, such as a texture, isn't checked.
+"""
+
+[[case]]
+id = "limits-wrong-prim"
+tags = ["limits"]
+question = "My reference points to a file that exists, but the prim it names isn't in that file. Will usd-inspect report it?"
+reference = """
+No. --check and find_missing_assets don't report a reference whose file exists but doesn't
+contain the prim it names.
+"""
+
+[[case]]
+id = "limits-clean-result"
+tags = ["limits"]
+question = "If --check reports no missing files, is my scene guaranteed to compose correctly?"
+reference = """
+No. --check only confirms that the files named by references and payloads exist. It doesn't
+report missing sublayers, missing file paths stored in attributes such as textures, or a
+reference whose file exists but doesn't contain the prim it names.
+"""
+
+# --- Test scenes ------------------------------------------------------------
+
+[[case]]
+id = "scenes-change"
+tags = ["scenes"]
+question = "How do I change one of the test scenes in examples/scenes?"
+reference = """
+Don't edit the .usda files by hand. Change scripts/make_scenes.py and run it again
+(python scripts/make_scenes.py). A test compares each committed scene with a fresh run of the
+script and fails if they differ.
+"""
+
+[[case]]
+id = "scenes-broken"
+tags = ["scenes"]
+question = "Which test scene has broken references, and what exactly is broken?"
+reference = """
+broken_layout.usda. Its MissingCrate prim references props/missing_crate.usda, and its
+MissingPayload prim loads props/missing_payload.usda as a payload. Neither file exists. Its
+CrateA prim references props/crate.usda, which does exist.
+"""
+
+# --- The docs pipeline ------------------------------------------------------
+
+[[case]]
+id = "pipeline-tested-examples"
+tags = ["pipeline"]
+question = "How do you make sure the code examples in the docs still work?"
+reference = """
+The Python examples are doctests that sphinx-build -b doctest runs in CI. The command-line
+examples are checked by a pytest test that runs each command on the CLI page and compares
+its output. The scene listings are included straight from the generated files.
+"""
+
+[[case]]
+id = "pipeline-ai-output"
+tags = ["pipeline"]
+question = "Is there a version of these docs I can give to an AI assistant?"
+reference = """
+Yes. The site publishes llms.txt, an index with a link to a Markdown copy of each page
+(PAGE.html.md), and llms-full.txt, which has every page's Markdown in one file.
+"""
+
+# --- Not answered by the docs -----------------------------------------------
+
+[[case]]
+id = "scene-complexity"
+tags = ["not-in-docs", "seed"]
+question = "How complex a scene can I analyze with this tool?"
+reference = """
+The docs don't say. They don't give any limit on scene size or complexity, or any performance
+figures. (They do say that open_stage loads all payloads.)
+"""
+
+[[case]]
+id = "license"
+tags = ["not-in-docs"]
+question = "What license is USD Scene Inspector released under?"
+reference = "The docs don't say what license the tool uses."
+
+[[case]]
+id = "usdz"
+tags = ["not-in-docs"]
+question = "Can I inspect a .usdz file?"
+reference = """
+The docs don't say. They describe reading .usda and .usd files and don't mention .usdz.
+"""
+
+[[case]]
+id = "usd-core-version"
+tags = ["not-in-docs"]
+question = "What's the minimum version of usd-core I need?"
+reference = """
+The docs don't give a version number. They say CI tests on Python 3.11 with the oldest
+supported usd-core, but not which version that is.
+"""
+
+[[case]]
+id = "fix-references"
+tags = ["not-in-docs"]
+question = "Can usd-inspect fix a broken reference for me, for example by pointing it at the right file?"
+reference = """
+The docs don't describe any way to fix references. They describe the tool as listing prims
+and attributes and reporting references and payloads whose files are missing.
+"""
