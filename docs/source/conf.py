@@ -28,8 +28,10 @@ extensions = [
     "sphinx.ext.napoleon",
     "sphinx.ext.viewcode",
     "sphinx_copybutton",
+    "sphinx_design",
 ]
 
+templates_path = ["_templates"]
 exclude_patterns = []
 
 # -- Options for autodoc and napoleon ----------------------------------------
@@ -65,7 +67,14 @@ html_title = f"{project} {version}"
 html_theme_options = {
     "github_url": "https://github.com/chad-brotherton/rst-sphinx-ci",
     "navigation_with_keys": False,
+    # Put the table of contents in the left sidebar instead of the top navbar.
+    "navbar_center": [],
+    "show_nav_level": 2,
+    "secondary_sidebar_items": ["page-toc"],
 }
+
+# Show the full table of contents on every page. See _templates/sidebar-nav-full.html.
+html_sidebars = {"**": ["sidebar-nav-full"]}
 
 # Strip prompts and output when readers copy code samples.
 copybutton_exclude = ".linenos, .gp, .go"
