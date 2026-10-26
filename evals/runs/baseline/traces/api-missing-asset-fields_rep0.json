@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files.\n\nAnswer using only the documentation below. If the documentation doesn't answer the question, say that it doesn't, instead of guessing. Keep answers short: a few sentences, plus a command or code sample when it helps.\n\n[documentation: llms-full.txt]"
+  },
+  {
+    "role": "user",
+    "content": "What does find_missing_assets tell me about each missing file?"
+  },
+  {
+    "role": "assistant",
+    "content": "`find_missing_assets(stage)` returns a list of `MissingAsset` objects, one per missing file, in prim order. Each has three fields:\n\n- **`prim_path`**: the path of the prim that has the reference or payload, such as `/World/MissingCrate`.\n- **`arc`**: either `\"reference\"` or `\"payload\"`.\n- **`asset_path`**: the path exactly as it's written in the scene, such as `./props/missing_crate.usda`.\n\n```pycon\n>>> from usd_inspect import find_missing_assets, open_stage\n>>> broken = open_stage(SCENES / \"broken_layout.usda\")\n>>> for missing in find_missing_assets(broken):\n...     print(missing.prim_path, missing.arc, missing.asset_path)\n/World/MissingCrate reference ./props/missing_crate.usda\n/World/MissingPayload payload ./props/missing_payload.usda\n```\n\nIf every file is found, the list is empty. It only reports references and payloads whose target files don't exist. It doesn't report missing sublayers, file paths stored in attributes (such as textures), or references whose file exists but doesn't contain the named prim."
+  }
+]

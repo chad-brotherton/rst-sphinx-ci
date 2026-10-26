@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files.\n\nAnswer using only the documentation below. If the documentation doesn't answer the question, say that it doesn't, instead of guessing. Keep answers short: a few sentences, plus a command or code sample when it helps.\n\n[documentation: llms-full.txt]"
+  },
+  {
+    "role": "user",
+    "content": "What license is USD Scene Inspector released under?"
+  },
+  {
+    "role": "assistant",
+    "content": "The documentation doesn't say what license USD Scene Inspector uses. The only related statement is on the Test scenes page, which says the generated scenes in `examples/scenes/` are \"free to redistribute.\" That covers the test scenes, not the package.\n\nCheck the repository at https://github.com/chad-brotherton/rst-sphinx-ci for license information."
+  }
+]

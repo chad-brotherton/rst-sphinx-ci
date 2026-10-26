@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files. If you don't know the answer, say so instead of guessing. Keep answers short."
+  },
+  {
+    "role": "user",
+    "content": "If --check reports no missing files, is my scene guaranteed to compose correctly?"
+  },
+  {
+    "role": "assistant",
+    "content": "I don't know exactly what `--check` covers in USD Scene Inspector, so I can't say for certain. Check the tool's documentation or `--help` output for its full scope.\n\nIn general, though, finding no missing files does **not** guarantee correct composition. A scene can resolve every file and still have problems such as:\n\n- References or payloads pointing to prim paths that don't exist in the target layer\n- Invalid or missing variant selections\n- Composition cycles (e.g., layers referencing each other)\n- Unresolved or mistyped asset paths that don't surface as \"missing files,\" depending on the resolver\n- Opinions that compose without error but don't produce the result you intended\n\nTo catch composition errors, you can open the stage with USD itself (for example, `usdchecker` or loading it in `usdview`) and look for composition warnings."
+  }
+]

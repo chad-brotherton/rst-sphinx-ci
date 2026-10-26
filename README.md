@@ -26,6 +26,9 @@ Every pull request runs these checks, and `main` requires them to pass:
 - the doctests, which run every Python example in the docs against generated test scenes
 - Vale, which fails the build on a spelling error in the docs, this README, or a docstring
 
+Answer-accuracy evals in `evals/` check that a model reading the docs answers 28 reader questions correctly: 28 of
+28 with the docs, 11 of 28 without them. They call the Claude API, so they run locally, not in CI.
+
 Each merge into `main` publishes the site, along with
 [`llms.txt`](https://llmstxt.org/), a Markdown copy of each page, and `llms-full.txt` for AI tools. The
 [pipeline page](https://chad-brotherton.github.io/rst-sphinx-ci/pipeline.html) explains each step.

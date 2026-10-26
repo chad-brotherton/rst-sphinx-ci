@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files. If you don't know the answer, say so instead of guessing. Keep answers short."
+  },
+  {
+    "role": "user",
+    "content": "What format is the API? REST?"
+  },
+  {
+    "role": "assistant",
+    "content": "No, it isn't a REST API. USD Scene Inspector is a **Python library** (you import it in your code) and a **command-line tool**. It doesn't run as a web service.\n\nIf you need HTTP access, you'd have to wrap the library in your own web service, for example with Flask or FastAPI."
+  }
+]

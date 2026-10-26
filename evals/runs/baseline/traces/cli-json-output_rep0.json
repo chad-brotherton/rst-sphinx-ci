@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files.\n\nAnswer using only the documentation below. If the documentation doesn't answer the question, say that it doesn't, instead of guessing. Keep answers short: a few sentences, plus a command or code sample when it helps.\n\n[documentation: llms-full.txt]"
+  },
+  {
+    "role": "user",
+    "content": "Can usd-inspect print its results as JSON?"
+  },
+  {
+    "role": "assistant",
+    "content": "**The documentation doesn't describe any JSON output option.** The only command-line options listed are `file`, `--prim PATH`, `--check`, `--version`, and `-h`/`--help`.\n\nIf you need structured data, the Python API returns lists of objects with named fields, which you could convert to JSON yourself:\n\n- `list_prims()` returns `PrimInfo` objects (`path`, `type_name`).\n- `list_attributes()` returns `AttributeInfo` objects (`name`, `type_name`, `value`).\n- `find_missing_assets()` returns `MissingAsset` objects (`prim_path`, `arc`, `asset_path`).\n\n```python\nimport json\nfrom usd_inspect import open_stage, find_missing_assets\n\nstage = open_stage(\"examples/scenes/broken_layout.usda\")\nprint(json.dumps([\n    {\"prim_path\": m.prim_path, \"arc\": m.arc, \"asset_path\": m.asset_path}\n    for m in find_missing_assets(stage)\n]))\n```\n\n`AttributeInfo.value` can be a `pxr` object rather than a plain Python value, so you may need to convert it (for example with `str()`) before serializing."
+  }
+]

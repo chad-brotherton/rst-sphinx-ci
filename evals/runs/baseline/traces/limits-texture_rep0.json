@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files.\n\nAnswer using only the documentation below. If the documentation doesn't answer the question, say that it doesn't, instead of guessing. Keep answers short: a few sentences, plus a command or code sample when it helps.\n\n[documentation: llms-full.txt]"
+  },
+  {
+    "role": "user",
+    "content": "Will usd-inspect --check catch a missing texture file?"
+  },
+  {
+    "role": "assistant",
+    "content": "No. `--check` (and `find_missing_assets()`) only checks that the files named by **references** and **payloads** exist. A file path stored in an attribute, such as a texture, isn't checked.\n\nIt also doesn't report:\n\n- A missing sublayer.\n- A reference whose file exists but doesn't contain the prim it names.\n\nSo a clean `--check` result doesn't guarantee that every file the scene uses is present. The documentation doesn't describe a way to check texture files with this tool."
+  }
+]

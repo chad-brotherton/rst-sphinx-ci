@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files. If you don't know the answer, say so instead of guessing. Keep answers short."
+  },
+  {
+    "role": "user",
+    "content": "Will usd-inspect --check catch a missing texture file?"
+  },
+  {
+    "role": "assistant",
+    "content": "I don't know. I don't have reliable details on exactly what `--check` validates, so I can't say whether it resolves texture asset paths or only checks scene structure.\n\nTo find out:\n\n- Run `usd-inspect --help` or check the docs for what `--check` covers.\n- Test it on a scene that references a texture file you've deliberately renamed, and see whether it reports an error.\n\nIf it doesn't catch it, USD's own `usdchecker` (with `--arkit` or the default asset-path checks) or `usdresolve` can verify that asset paths resolve."
+  }
+]

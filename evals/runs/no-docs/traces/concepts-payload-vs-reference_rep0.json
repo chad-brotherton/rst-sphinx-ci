@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files. If you don't know the answer, say so instead of guessing. Keep answers short."
+  },
+  {
+    "role": "user",
+    "content": "What's the difference between a reference and a payload?"
+  },
+  {
+    "role": "assistant",
+    "content": "Both pull content from another USD file (or another prim) into your scene. The difference is **when that content loads**:\n\n- **Reference**: Always loaded. When the stage opens, referenced content is composed in immediately.\n- **Payload**: Can be deferred. You can open a stage with payloads unloaded and then load them selectively, for example only the assets you need. This keeps large scenes fast to open and light on memory.\n\nPayloads are typically used for heavy assets like detailed geometry, so you can browse a scene's hierarchy without loading everything. References suit lighter content that should always be present, such as shared materials or small reusable components.\n\nIf you're asking how USD Scene Inspector reports or handles payloads (for example, whether it loads them by default), I'd need to check its documentation rather than guess."
+  }
+]

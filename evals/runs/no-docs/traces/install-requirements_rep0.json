@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files. If you don't know the answer, say so instead of guessing. Keep answers short."
+  },
+  {
+    "role": "user",
+    "content": "What are all of the requirements and dependencies I need to install the tool?"
+  },
+  {
+    "role": "assistant",
+    "content": "I don't have reliable information on the exact requirements for USD Scene Inspector, so I can't give you a complete, accurate list.\n\nTo find them, check:\n\n- **The project's README or installation docs**, which usually list supported Python versions and dependencies.\n- **`pyproject.toml`, `setup.py`, `setup.cfg`, or `requirements.txt`** in the source repository, which define the actual install dependencies.\n- **The package page on PyPI** (if it's published there), which shows the required Python version and dependencies.\n\nPython tools that read USD files typically need the USD Python bindings (the `pxr` module, available via the `usd-core` package on PyPI or a full OpenUSD build). However, I can't confirm that this tool requires them or which versions it supports."
+  }
+]

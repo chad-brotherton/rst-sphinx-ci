@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files. If you don't know the answer, say so instead of guessing. Keep answers short."
+  },
+  {
+    "role": "user",
+    "content": "Which test scene has broken references, and what exactly is broken?"
+  },
+  {
+    "role": "assistant",
+    "content": "I don't know which test scene that is. I don't have the project's test files or documentation to check.\n\nTo find it yourself:\n\n- **Search the test directory** for files or fixtures with names like `broken`, `missing`, or `unresolved`. Scenes built to fail on purpose are usually named that way.\n- **Check the tests that use them.** A test asserting on unresolved references will show which file it loads and what it expects to be missing.\n- **Inspect the file directly.** For text `.usda` files, look for `references`, `payload`, or `subLayers` entries pointing to paths that don't exist. Also look for references to prim paths that aren't defined in the target layer.\n\nIf you paste the test file list or the relevant scene file, I can help identify what's broken."
+  }
+]

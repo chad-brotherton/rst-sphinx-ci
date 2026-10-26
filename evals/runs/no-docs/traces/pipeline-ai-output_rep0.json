@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files. If you don't know the answer, say so instead of guessing. Keep answers short."
+  },
+  {
+    "role": "user",
+    "content": "Is there a version of these docs I can give to an AI assistant?"
+  },
+  {
+    "role": "assistant",
+    "content": "I don't know of an AI-specific version (such as an `llms.txt` file) for USD Scene Inspector, and I don't want to point you to one that may not exist.\n\nSome things you could try:\n\n- **Look for `llms.txt`** at the root of the documentation site (e.g., `https://<docs-site>/llms.txt`). Many projects publish one.\n- **Use the source docs.** If the project is on GitHub or similar, the `docs/` folder or README is usually plain Markdown that you can give to an assistant directly.\n- **Generate a reference from the tool itself.** Running the CLI's `--help` output or Python's `help()` on the module gives the assistant accurate, version-specific information.\n- **Ask the maintainers.** An issue or discussion post on the project's repository would get you a definitive answer."
+  }
+]
