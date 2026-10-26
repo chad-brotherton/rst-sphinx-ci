@@ -20,6 +20,8 @@ files.
    :caption: Reference
 
    api
+   glossary
+   scenes
 
 .. toctree::
    :maxdepth: 2
