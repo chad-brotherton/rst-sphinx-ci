@@ -44,7 +44,7 @@ or commit messages) until it actually works.
 - [x] Merges to `main` publish the built site to GitHub Pages.
 - [x] `main` is protected: changes arrive by pull request with passing checks.
 - [x] Stretch: `scripts/build_llms_txt.py` generates `llms.txt` and `llms-full.txt` from the built site.
-- [ ] Stretch: `evals/` holds question-and-answer pairs, plus a script that checks an LLM's answers against the
+- [x] Stretch: `evals/` holds question-and-answer pairs, plus a script that checks an LLM's answers against the
       docs.
 
 ## Repository layout
@@ -118,6 +118,7 @@ sphinx-build -b linkcheck docs/source docs/build/linkcheck
 vale sync                                # once: download the Google style into styles/
 vale docs/source README.md src scripts
 python scripts/build_llms_txt.py         # after the HTML build: llms.txt, llms-full.txt, page .md files
+python evals/run_evals.py                # needs ANTHROPIC_API_KEY and .[evals]; never in CI
 pytest
 ```
 
@@ -163,7 +164,14 @@ Update this section as work lands.
   `PAGE.html.md` copy of each page into `docs/build/html`. It converts HTML with `markdownify` and `beautifulsoup4`
   (in the `docs` extra). The `docs` job runs it on every PR; `tests/test_llms_txt.py` builds the docs and checks the
   output end to end, so the `tests` job installs `.[docs,test]`.
-- Next: a release to publish `llms.txt`, then check `/llms.txt` on the live site; then evals.
+- `llms.txt` release (PR #13): `/llms.txt`, `/llms-full.txt`, and every `PAGE.html.md` serve on the live site.
+- Evals: `evals/questions.toml` has 28 cases (3 maintainer seeds, 5 not answered by the docs). `evals/run_evals.py`
+  sends `llms-full.txt` plus each question to `claude-opus-5-5` (effort `medium`, no refusal fallbacks) and has
+  `claude-sonnet-5-5` grade `correct` and `grounded` against the reference with a JSON schema. The baseline on
+  2026-10-26 (docs sha `c618fdbde86d`) scored 28/28 correct and 27/28 grounded; the no-docs control scored 11/28 and
+  5/28. Measured cost: $0.58 baseline, $0.35 control. Results are in `evals/runs/`; `tests/test_evals.py` covers the
+  runner offline with a fake client. Pipeline-page numbers are from that run: update them if you rerun.
+- Next: a release PR to publish the evals section. Every item in the definition of done is complete.
 
 Decisions made so far:
 
