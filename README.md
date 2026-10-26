@@ -26,7 +26,8 @@ Every pull request runs these checks, and `main` requires them to pass:
 - the doctests, which run every Python example in the docs against generated test scenes
 - Vale, which fails the build on a spelling error in the docs, this README, or a docstring
 
-Each merge into `main` publishes the site. The
+Each merge into `main` publishes the site, along with
+[`llms.txt`](https://llmstxt.org/), a Markdown copy of each page, and `llms-full.txt` for AI tools. The
 [pipeline page](https://chad-brotherton.github.io/rst-sphinx-ci/pipeline.html) explains each step.
 
 ## Build it locally
