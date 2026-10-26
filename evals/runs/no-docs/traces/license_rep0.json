@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files. If you don't know the answer, say so instead of guessing. Keep answers short."
+  },
+  {
+    "role": "user",
+    "content": "What license is USD Scene Inspector released under?"
+  },
+  {
+    "role": "assistant",
+    "content": "I don't know which license USD Scene Inspector uses. You can find it in these places:\n\n- **The `LICENSE` file** in the project's source repository\n- **The package metadata**, by running `pip show usd-scene-inspector` (adjust the name if needed) and checking the `License` field\n- **The project's PyPI page**, under \"Meta\" → License\n\nIf you share what you find, I can help explain what that license allows."
+  }
+]

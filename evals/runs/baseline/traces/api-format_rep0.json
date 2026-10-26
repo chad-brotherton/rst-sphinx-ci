@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files.\n\nAnswer using only the documentation below. If the documentation doesn't answer the question, say that it doesn't, instead of guessing. Keep answers short: a few sentences, plus a command or code sample when it helps.\n\n[documentation: llms-full.txt]"
+  },
+  {
+    "role": "user",
+    "content": "What format is the API? REST?"
+  },
+  {
+    "role": "assistant",
+    "content": "No, it's not a REST API. USD Scene Inspector is a **Python library** (`usd_inspect`) with a command-line tool (`usd-inspect`). You call its functions directly from Python:\n\n```python\nfrom usd_inspect import open_stage, list_prims, list_attributes, find_missing_assets\n\nstage = open_stage(\"examples/scenes/simple.usda\")\nfor prim in list_prims(stage):\n    print(prim.path, prim.type_name)\n```\n\nThe functions return plain Python objects (`PrimInfo`, `AttributeInfo`, `MissingAsset`). The documentation doesn't mention any HTTP or network interface."
+  }
+]

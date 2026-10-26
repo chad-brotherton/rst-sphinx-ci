@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files.\n\nAnswer using only the documentation below. If the documentation doesn't answer the question, say that it doesn't, instead of guessing. Keep answers short: a few sentences, plus a command or code sample when it helps.\n\n[documentation: llms-full.txt]"
+  },
+  {
+    "role": "user",
+    "content": "Can list_attributes give me an attribute's value at frame 24?"
+  },
+  {
+    "role": "assistant",
+    "content": "**No.** `list_attributes(stage, prim_path)` has no time parameter, and each `AttributeInfo.value` is the attribute's value **at the default time**, not at a specific frame such as 24.\n\nThe documentation doesn't describe any way to read time-sampled values with USD Scene Inspector, either from Python or from the `usd-inspect` command."
+  }
+]

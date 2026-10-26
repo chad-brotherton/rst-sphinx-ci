@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files. If you don't know the answer, say so instead of guessing. Keep answers short."
+  },
+  {
+    "role": "user",
+    "content": "How do I list every prim in a scene from the command line?"
+  },
+  {
+    "role": "assistant",
+    "content": "I don't know the exact command for USD Scene Inspector, and I don't want to guess at flags. Try `--help` on the tool or check its documentation.\n\nIf you just need the prim list, the standard USD tools can do it:\n\n```\nusdtree scene.usd\n```\n\nThis prints the full prim hierarchy."
+  }
+]

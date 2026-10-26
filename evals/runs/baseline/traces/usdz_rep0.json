@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files.\n\nAnswer using only the documentation below. If the documentation doesn't answer the question, say that it doesn't, instead of guessing. Keep answers short: a few sentences, plus a command or code sample when it helps.\n\n[documentation: llms-full.txt]"
+  },
+  {
+    "role": "user",
+    "content": "Can I inspect a .usdz file?"
+  },
+  {
+    "role": "assistant",
+    "content": "The documentation doesn't say. It only lists `.usda` and `.usd` files as inputs, for both the `usd-inspect` command and `open_stage()`. It never mentions `.usdz`, so it doesn't confirm whether `.usdz` files work.\n\nYou can try it yourself. If USD can't read the file, the command exits with status 2 and `open_stage()` raises `ValueError`:\n\n```console\n$ usd-inspect scene.usdz\n```"
+  }
+]

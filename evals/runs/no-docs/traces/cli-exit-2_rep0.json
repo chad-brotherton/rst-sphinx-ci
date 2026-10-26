@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files. If you don't know the answer, say so instead of guessing. Keep answers short."
+  },
+  {
+    "role": "user",
+    "content": "What does exit status 2 from usd-inspect mean?"
+  },
+  {
+    "role": "assistant",
+    "content": "I don't know. I don't have documentation of usd-inspect's specific exit codes, so I can't say for certain what status 2 means.\n\nFor context only: many Python CLI tools built on `argparse` exit with 2 on command-line usage errors, such as an unknown flag or a missing argument. That's a general convention, not confirmed behavior for usd-inspect.\n\nTo find out:\n- Run `usd-inspect --help` and check for an exit-status section.\n- Check the project's README, docs, or changelog.\n- Look at stderr output from the failing run, which usually explains the error."
+  }
+]

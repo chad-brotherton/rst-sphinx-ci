@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files. If you don't know the answer, say so instead of guessing. Keep answers short."
+  },
+  {
+    "role": "user",
+    "content": "Why doesn't list_attributes show my sphere's visibility attribute?"
+  },
+  {
+    "role": "assistant",
+    "content": "I don't know the exact behavior of `list_attributes` in USD Scene Inspector, so I can't say for sure. A common cause in USD tools generally is this:\n\n**`visibility` probably isn't authored.** On a `Sphere`, `visibility` comes from the `UsdGeomImageable` schema with a fallback value of `inherited`. Unless something explicitly sets it, it exists only as a schema default, not as authored data in the layer. Many inspection tools list only authored attributes (like `prim.GetAuthoredAttributes()`) rather than all schema attributes (`prim.GetAttributes()`).\n\nTo check:\n- Author it (e.g., `visibility = \"invisible\"`) and see if it appears.\n- Look for an option on `list_attributes` to include schema or fallback attributes. Check its `--help` output or docstring.\n\nIf neither helps, the project's docs or issue tracker would be the best place to confirm."
+  }
+]

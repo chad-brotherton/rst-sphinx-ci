@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files. If you don't know the answer, say so instead of guessing. Keep answers short."
+  },
+  {
+    "role": "user",
+    "content": "Can list_attributes give me an attribute's value at frame 24?"
+  },
+  {
+    "role": "assistant",
+    "content": "I don't know. I don't have reliable details on `list_attributes`, such as whether it takes a time or frame parameter, so I can't say whether it returns time-sampled values.\n\nTo find out:\n- Run `help(list_attributes)` in Python, or check the CLI's `--help` output.\n- Look for a parameter like `time`, `frame`, or `timecode` in the docs.\n\nIf the tool can't do it, you can use the USD Python API directly:\n\n```python\nfrom pxr import Usd\nstage = Usd.Stage.Open(\"scene.usd\")\nattr = stage.GetPrimAtPath(\"/path/to/prim\").GetAttribute(\"attrName\")\nvalue = attr.Get(Usd.TimeCode(24))\n```"
+  }
+]

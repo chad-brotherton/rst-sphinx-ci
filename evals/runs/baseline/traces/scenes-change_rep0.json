@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files.\n\nAnswer using only the documentation below. If the documentation doesn't answer the question, say that it doesn't, instead of guessing. Keep answers short: a few sentences, plus a command or code sample when it helps.\n\n[documentation: llms-full.txt]"
+  },
+  {
+    "role": "user",
+    "content": "How do I change one of the test scenes in examples/scenes?"
+  },
+  {
+    "role": "assistant",
+    "content": "Don't edit the `.usda` files by hand. Change the generator script, `scripts/make_scenes.py`, and run it again from the repository root:\n\n```console\n$ python scripts/make_scenes.py\n```\n\nThe script produces the same output every time. A test compares each committed scene with a fresh run of the script and fails if they differ, so hand edits break the tests."
+  }
+]

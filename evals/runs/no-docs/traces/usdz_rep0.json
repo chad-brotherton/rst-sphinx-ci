@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files. If you don't know the answer, say so instead of guessing. Keep answers short."
+  },
+  {
+    "role": "user",
+    "content": "Can I inspect a .usdz file?"
+  },
+  {
+    "role": "assistant",
+    "content": "I don't know for sure whether USD Scene Inspector supports `.usdz` files. I don't have documentation confirming it.\n\nYou can find out quickly by:\n\n- **Trying it directly** on a `.usdz` file and seeing whether it loads or errors.\n- **Checking the docs or `--help` output** for a list of supported formats.\n\nIf the tool opens files through the standard USD API (`Usd.Stage.Open`), `.usdz` will likely work, since USD reads `.usdz` packages natively. That's an assumption, though, not something I can confirm for this tool."
+  }
+]

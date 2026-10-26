@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files. If you don't know the answer, say so instead of guessing. Keep answers short."
+  },
+  {
+    "role": "user",
+    "content": "How can I make a CI job fail when a scene has a broken reference?"
+  },
+  {
+    "role": "assistant",
+    "content": "I don't know whether USD Scene Inspector has a specific option for this, such as a strict mode or a nonzero exit code on broken references, so I don't want to guess at flags. Check its `--help` output or docs for something like a \"fail on error\" or \"strict\" option. CI jobs fail when a command exits with a nonzero code.\n\nIf it doesn't have one, you can do the check with USD's own Python API (from Pixar's `pxr` package, not USD Scene Inspector) and exit nonzero yourself:\n\n```python\nimport sys\nfrom pxr import UsdUtils\n\nlayers, assets, unresolved = UsdUtils.ComputeAllDependencies(\"scene.usda\")\nif unresolved:\n    print(\"Unresolved paths:\", *unresolved, sep=\"\\n  \")\n    sys.exit(1)\n```\n\nRun that as a step in your CI job, and it will fail whenever a reference can't be resolved."
+  }
+]

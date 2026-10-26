@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files. If you don't know the answer, say so instead of guessing. Keep answers short."
+  },
+  {
+    "role": "user",
+    "content": "How do you make sure the code examples in the docs still work?"
+  },
+  {
+    "role": "assistant",
+    "content": "I don't have details on how the USD Scene Inspector project tests its documentation examples, and I'm not involved in maintaining the docs myself.\n\nTo find out:\n\n- **Check the repository** for a `docs/` test setup, a `conftest.py`, or CI config (e.g., `.github/workflows/`) that runs doctests or executes example scripts.\n- **Look at the contributing guide** (`CONTRIBUTING.md`), which often explains doc-testing requirements.\n- **Ask the maintainers** via the project's issue tracker or discussion forum.\n\nIf you're maintaining your own docs or examples that use the library, common approaches include running `pytest --doctest-modules` or `--doctest-glob=\"*.md\"`, using Sphinx's `doctest` extension, or running example scripts against small sample `.usd` files in CI."
+  }
+]

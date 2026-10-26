@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files. If you don't know the answer, say so instead of guessing. Keep answers short."
+  },
+  {
+    "role": "user",
+    "content": "What happens if I call open_stage on a file that doesn't exist?"
+  },
+  {
+    "role": "assistant",
+    "content": "I don't know how USD Scene Inspector's `open_stage` handles a missing file. I don't have reliable details on that behavior, so I don't want to guess whether it raises an exception, returns `None`, or logs an error.\n\nTo find out:\n\n- **Check the docstring:** `help(open_stage)` in Python, or the library's API docs.\n- **Test it directly:**\n  ```python\n  try:\n      stage = open_stage(\"does_not_exist.usda\")\n      print(\"Returned:\", stage)\n  except Exception as e:\n      print(type(e).__name__, e)\n  ```\n\nIf the library calls Pixar's `Usd.Stage.Open` without wrapping it, you'd likely see a `pxr.Tf.ErrorException`. But that's an assumption about its internals, not confirmed behavior."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files. If you don't know the answer, say so instead of guessing. Keep answers short."
+  },
+  {
+    "role": "user",
+    "content": "Can I install it on Windows? Is anything different from macOS?"
+  },
+  {
+    "role": "assistant",
+    "content": "I don't have reliable information on USD Scene Inspector's platform support or any Windows-specific installation steps, so I can't say for certain.\n\nSome general things to check, since it's a Python tool built on USD:\n\n- **USD dependency:** Pixar's `usd-core` package on PyPI provides prebuilt wheels for Windows, macOS, and Linux, so the core USD libraries are usually installable on Windows with `pip`. Check which USD build the tool expects.\n- **Python version:** Make sure your Python version matches what both the tool and `usd-core` support. Wheels may lag behind the newest Python releases.\n- **Command-line usage:** On Windows, the CLI entry point may need your Python `Scripts` folder on `PATH`. Paths in commands use backslashes or need quoting if they contain spaces.\n\nFor definitive answers, check the project's README, installation docs, or issue tracker for Windows notes."
+  }
+]

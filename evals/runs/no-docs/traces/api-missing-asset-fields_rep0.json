@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files. If you don't know the answer, say so instead of guessing. Keep answers short."
+  },
+  {
+    "role": "user",
+    "content": "What does find_missing_assets tell me about each missing file?"
+  },
+  {
+    "role": "assistant",
+    "content": "I don't know the exact details of what `find_missing_assets` reports for each missing file, and I'd rather not guess.\n\nTo find out:\n\n- **Python:** run `help(find_missing_assets)` or check its docstring.\n- **Inspect the output:** call it on a scene with a known broken reference and print the result to see which fields it includes (for example, asset path, referencing prim, or layer).\n- **Docs/source:** check the project's documentation or the function's source.\n\nIf you paste the docstring or a sample of its output, I can help interpret it."
+  }
+]
