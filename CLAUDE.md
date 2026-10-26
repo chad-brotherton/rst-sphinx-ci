@@ -129,7 +129,12 @@ Update this section as work lands.
 - Sphinx scaffold on `feature/sphinx-scaffold`: `pydata-sphinx-theme`, autodoc, napoleon, doctest, intersphinx,
   viewcode, and copybutton. `SCENES` is defined in `doctest_global_setup`. Stub pages exist for every docs section
   in the definition of done. HTML (`-W`), doctest (0 tests), and linkcheck builds pass.
-- Next: `feature/scenes` (`scripts/make_scenes.py` and generated scenes).
+- Test scenes on `feature/scenes`: `scripts/make_scenes.py` writes `simple.usda`, `props/crate.usda`,
+  `layout.usda` (all arcs resolve), and `broken_layout.usda` (one missing reference, one missing payload). Output is
+  deterministic. `tests/test_scenes.py` fails if a committed scene differs from a fresh run.
+- `Usd.Stage.GetCompositionErrors()` reports the broken arcs (verified on `usd-core` 26.11; not yet checked against the
+  26.5 floor).
+- Next: the CI workflow, or the `usd_inspect` features.
 
 Decisions made so far:
 
