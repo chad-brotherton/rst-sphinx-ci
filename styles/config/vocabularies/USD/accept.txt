@@ -1,0 +1,12 @@
+autodoc
+doctests?
+intersphinx
+Pixar
+prims?
+pxr
+Sdf
+unix
+USD
+USD Scene Inspector
+usda
+Xform
