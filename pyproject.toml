@@ -32,6 +32,10 @@ docs = [
 test = [
     "pytest>=8",
 ]
+# evals/run_evals.py calls the Claude API. Not needed in CI.
+evals = [
+    "anthropic>=2.3,<3",
+]
 
 [tool.setuptools.dynamic]
 version = { attr = "usd_inspect.__version__" }
