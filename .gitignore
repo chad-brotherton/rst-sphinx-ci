@@ -1,0 +1,10 @@
+_build/
+__pycache__/
+.venv/
+docs/build/
+.DS_Store
+*.egg-info/
+.pytest_cache/
+# Vale packages are downloaded by `vale sync`; only the config is committed.
+styles/*
+!styles/config/

@@ -1,0 +1,27 @@
+#usda 1.0
+(
+    defaultPrim = "World"
+    upAxis = "Z"
+)
+
+def Xform "World"
+{
+    def Xform "CrateA" (
+        prepend references = @./props/crate.usda@
+    )
+    {
+    }
+
+    def Xform "MissingCrate" (
+        prepend references = @./props/missing_crate.usda@
+    )
+    {
+    }
+
+    def Xform "MissingPayload" (
+        prepend payload = @./props/missing_payload.usda@
+    )
+    {
+    }
+}
+

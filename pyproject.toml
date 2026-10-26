@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "usd-scene-inspector"
+dynamic = ["version"]
+description = "Inspect prims, attributes, and broken references in USD scene files."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Chad Brotherton" }]
+requires-python = ">=3.11"
+dependencies = [
+    # 26.5 is the first release with wheels for Python 3.14.
+    "usd-core>=26.5",
+]
+
+[project.optional-dependencies]
+docs = [
+    "sphinx>=8.2",
+    "pydata-sphinx-theme>=0.16",
+    "sphinx-copybutton>=0.5",
+    "sphinx-design>=0.6",
+]
+test = [
+    "pytest>=8",
+]
+
+[tool.setuptools.dynamic]
+version = { attr = "usd_inspect.__version__" }
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
