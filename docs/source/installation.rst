@@ -17,7 +17,7 @@ Clone the repository:
    git clone https://github.com/chad-brotherton/rst-sphinx-ci.git
    cd rst-sphinx-ci
 
-Create and activate a virtual environment, then install the package:
+Create and activate a virtual enviroment, then install the package:
 
 .. tab-set::
    :sync-group: os
