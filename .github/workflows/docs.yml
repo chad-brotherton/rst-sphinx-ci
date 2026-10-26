@@ -41,8 +41,9 @@ jobs:
           cache: pip
           cache-dependency-path: pyproject.toml
 
-      - name: Install package and test dependencies
-        run: pip install -e ".[test]"
+      # The docs extra is needed because tests/test_llms_txt.py builds the docs.
+      - name: Install package, docs, and test dependencies
+        run: pip install -e ".[docs,test]"
 
       - name: Pin lowest supported dependencies
         if: matrix.deps == 'lowest'
@@ -72,6 +73,10 @@ jobs:
 
       - name: Run doctests
         run: make -C docs doctest SPHINXOPTS="-W --keep-going"
+
+      # Runs on every pull request, so a broken generator fails the build.
+      - name: Generate llms.txt, llms-full.txt, and Markdown pages
+        run: python scripts/build_llms_txt.py
 
       - name: Upload site for GitHub Pages
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'

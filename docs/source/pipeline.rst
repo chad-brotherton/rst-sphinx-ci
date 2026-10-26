@@ -22,6 +22,8 @@ The docs live in the same repository as the code:
      - The package. Its docstrings become the :doc:`api`.
    * - ``examples/scenes/``
      - The :ref:`test scenes <test-scenes>` that every example runs against.
+   * - ``scripts/build_llms_txt.py``
+     - Generates the :ref:`output for AI tools <llms-txt>` from the built site.
    * - ``.vale.ini`` and ``styles/``
      - The style and spelling rules.
    * - ``.github/workflows/docs.yml``
@@ -82,7 +84,8 @@ Each pull request into ``develop`` or ``main`` runs these jobs:
      - Yes
    * - ``docs``
      - Builds the HTML with warnings treated as errors, so a broken
-       cross-reference fails the build. Then runs the doctests.
+       cross-reference fails the build. Then runs the doctests and generates
+       the :ref:`output for AI tools <llms-txt>`.
      - Yes
    * - ``vale``
      - Lints the docs, README, and docstrings for style and spelling.
@@ -128,6 +131,55 @@ Install the package with the docs and test extras, then build:
    $ pytest
 
 Open ``docs/build/html/index.html`` in a browser to read the result.
+
+.. _llms-txt:
+
+Output for AI tools
+-------------------
+
+Each release also publishes the docs in forms that AI tools and coding
+assistants can read without parsing HTML. After the HTML build,
+``scripts/build_llms_txt.py`` reads the built site and writes three kinds of
+files next to the pages:
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 70
+
+   * - File
+     - Contents
+   * - ``llms.txt``
+     - An index of the docs in the format described at `llmstxt.org
+       <https://llmstxt.org/>`_: the
+       project name, a one-line summary, and a link to each page, grouped by
+       the sections of the table of contents. The pipeline page, this page, is
+       listed under ``Optional``, because it doesn't help you use the tool.
+   * - ``PAGE.html.md``
+     - A Markdown copy of each page, such as ``overview.html.md``. The links
+       in ``llms.txt`` point to these copies.
+   * - ``llms-full.txt``
+     - Every page's Markdown in one file, in table-of-contents order, with
+       each page's URL under its title.
+
+The script takes the page order and section names from the table of contents
+on the built index page, and each page's URL from its canonical link, which
+Sphinx adds because ``html_baseurl`` is set in ``conf.py``. Nothing is listed
+by hand, so a new page appears in ``llms.txt`` as soon as it's in the table of
+contents.
+
+A pytest test builds the docs, runs the script, and checks that every page is
+listed and converted. It also checks that no navigation or heading anchors are
+left in the Markdown. The ``docs`` job also runs the script on every pull request.
+
+On the published site, the index is at
+``https://chad-brotherton.github.io/rst-sphinx-ci/llms.txt``.
+
+To generate the files locally, build the HTML first:
+
+.. code-block:: console
+
+   $ sphinx-build -W -b html docs/source docs/build/html
+   $ python scripts/build_llms_txt.py
 
 .. _rst-features:
 

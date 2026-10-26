@@ -64,6 +64,8 @@ intersphinx_mapping = {
 
 html_theme = "pydata_sphinx_theme"
 html_title = f"{project} {version}"
+# Adds a canonical link to each page. scripts/build_llms_txt.py reads it for page URLs.
+html_baseurl = "https://chad-brotherton.github.io/rst-sphinx-ci/"
 html_theme_options = {
     "github_url": "https://github.com/chad-brotherton/rst-sphinx-ci",
     "navigation_with_keys": False,
