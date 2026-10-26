@@ -16,6 +16,9 @@ dependencies = [
     "usd-core>=26.5",
 ]
 
+[project.scripts]
+usd-inspect = "usd_inspect.cli:main"
+
 [project.optional-dependencies]
 docs = [
     "sphinx>=8.2",
