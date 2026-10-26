@@ -99,7 +99,7 @@ pyproject.toml                 package metadata and dependencies
 
 ```bash
 python3 -m venv .venv && source .venv/bin/activate
-pip install -e ".[docs,test]"            # once pyproject.toml defines these extras
+pip install -e ".[docs,test]"            # required before building docs: conf.py reads the package version
 
 python scripts/make_scenes.py            # regenerate test scenes
 
@@ -115,5 +115,20 @@ pytest
 Update this section as work lands.
 
 - Repo created with `main` and `develop`; signed, verified commits working.
-- `.gitignore` covers `_build/`, `__pycache__/`, `.venv/`. Add `docs/build/`.
-- Next: scaffold Sphinx in `docs/` (separate source and build), then `feature/scenes`.
+- MIT license added. `.gitignore` covers `docs/build/`, `.DS_Store`, `*.egg-info/`, and `.pytest_cache/`.
+- `pyproject.toml` defines the package (`requires-python >= 3.11`, `usd-core >= 26.5`) and the `docs` and `test`
+  extras. `src/usd_inspect/` is a stub with only `__version__`.
+- Sphinx scaffold on `feature/sphinx-scaffold`: `pydata-sphinx-theme`, autodoc, napoleon, doctest, intersphinx,
+  viewcode, and copybutton. `SCENES` is defined in `doctest_global_setup`. Stub pages exist for every docs section
+  in the definition of done. HTML (`-W`), doctest (0 tests), and linkcheck builds pass.
+- Next: `feature/scenes` (`scripts/make_scenes.py` and generated scenes).
+
+Decisions made so far:
+
+- Theme: `pydata-sphinx-theme`, the open-source base of the reference project's theme. Don't use the vendor's own
+  theme package; its license restricts it to the vendor's products.
+- Vale: the `Google` style plus a custom vocabulary for USD terms.
+- Linkcheck: non-blocking on pull requests, plus a weekly scheduled run that must pass.
+- Branch protection: protect `main` only. The maintainer runs the `gh api` command, which Claude drafts after the CI
+  job names exist.
+- Evals (stretch): run locally against the Claude API and commit the results. No API key in CI.
