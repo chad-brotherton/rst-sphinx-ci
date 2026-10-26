@@ -25,8 +25,15 @@ or commit messages) until it actually works.
       deliberately broken reference.
 - [ ] Sphinx docs in `docs/source/`, written in reStructuredText:
   - overview, installation, quick start, CLI usage, and a page explaining the docs pipeline itself
+  - a test scenes page that describes each generated scene
+  - a glossary of USD terms (prim, layer, reference, payload, composition arc), linked from other pages with
+    `:term:`
   - API reference generated with `sphinx.ext.autodoc` from docstrings
   - code samples validated with `sphinx.ext.doctest` against the generated scenes
+  - a full table-of-contents sidebar on every page, plus an "On this page" sidebar
+  - admonitions (`note`, `important`, `warning`, `tip`) used in real content
+  - `sphinx-design` tabs where instructions differ by platform
+  - a section on the pipeline page that points to each rST feature the docs use
 - [ ] GitHub Actions on every pull request to `develop` or `main`:
   - `sphinx-build -W` (warnings fail the build)
   - `make doctest`
@@ -61,8 +68,9 @@ pyproject.toml                 package metadata and dependencies
 - Write all docs pages in reStructuredText (`.rst`), not Markdown. `README.md` is the only Markdown file.
 - Use Sphinx roles for cross-references (`:doc:`, `:ref:`, `:py:func:`, `:py:class:`) rather than raw links, so
   the build validates them.
-- Every code sample a reader might copy must be a doctest that runs in CI. Use the `SCENES` path defined in
-  `doctest_global_setup` in `conf.py`; never hard-code absolute paths.
+- Every Python code sample a reader might copy must be a doctest that runs in CI. Use the `SCENES` path defined in
+  `doctest_global_setup` in `conf.py`; never hard-code absolute paths. Shell commands use `code-block`.
+- Use admonitions (`note`, `important`, `warning`, `tip`) where they help the reader, not as decoration.
 - Docstrings use Google style, rendered with `sphinx.ext.napoleon`.
 - Write plainly and in second person. Prefer short sentences and task-oriented headings.
 
