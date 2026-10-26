@@ -181,6 +181,73 @@ To generate the files locally, build the HTML first:
    $ sphinx-build -W -b html docs/source docs/build/html
    $ python scripts/build_llms_txt.py
 
+.. _evals:
+
+Answer-accuracy evals
+---------------------
+
+The tests check that the examples run. The evals check something else: whether
+a model that reads these docs answers a reader's questions correctly.
+
+``evals/questions.toml`` holds 28 questions, each with a reference answer
+written from the docs. They cover installation, the Python API, the command
+line, USD concepts, the limits of ``--check``, the test scenes, and this
+pipeline. Five questions ask about things the docs don't cover, such as the
+license and ``.usdz`` files. For those, the right answer is to say the docs
+don't cover it, not to guess.
+
+``evals/run_evals.py`` sends ``llms-full.txt`` and each question to the model
+under test. A second model, the judge, compares each answer with its reference
+and records two results:
+
+``correct``
+   The answer states the facts in the reference and contradicts none of them.
+
+``grounded``
+   Every factual claim in the answer is supported by the docs.
+
+The runner also runs the questions once without the docs. That run shows how
+much of the score comes from the docs rather than from what the model already
+knows.
+
+.. list-table::
+   :header-rows: 1
+   :widths: 30 35 35
+
+   * - Run
+     - ``correct``
+     - ``grounded``
+   * - With the docs
+     - 28 of 28
+     - 27 of 28
+   * - Without the docs
+     - 11 of 28
+     - 5 of 28
+
+These results are from the October 26, 2026 run, with ``claude-opus-5-5`` as
+the model under test and ``claude-sonnet-5-5`` as the judge. Without the docs,
+the model still answered general USD questions, but it couldn't answer
+questions only these docs answer, such as the exit status of ``--check``.
+
+The one ungrounded answer said that passing both ``--check`` and ``--prim``
+exits with status 2. That's true, but the docs only imply it.
+
+The evals call the Claude API, so they need an API key and don't run in CI.
+Run them after a docs change to check that the docs still answer what they
+used to:
+
+.. code-block:: console
+
+   $ export ANTHROPIC_API_KEY=...
+   $ pip install -e ".[evals]"
+   $ sphinx-build -W -b html docs/source docs/build/html
+   $ python scripts/build_llms_txt.py
+   $ python evals/run_evals.py --variant after-my-change
+
+Each run writes ``SUMMARY.md``, one result per question, and a transcript of
+each answer to ``evals/runs/RUN/``. A full run costs about 60 cents at
+first-party API prices, because the docs are cached after the first question.
+
 .. _rst-features:
 
 reStructuredText features in these docs
