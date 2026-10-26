@@ -42,6 +42,8 @@ attributes set prints a message instead:
    $ usd-inspect examples/scenes/simple.usda --prim /World
    No authored attributes on /World.
 
+.. _cli-check:
+
 Check for missing files
 -----------------------
 
