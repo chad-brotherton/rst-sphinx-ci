@@ -1,0 +1,31 @@
+#usda 1.0
+(
+    defaultPrim = "World"
+    upAxis = "Z"
+)
+
+def Xform "World"
+{
+    def Xform "CrateA" (
+        prepend references = @./props/crate.usda@
+    )
+    {
+    }
+
+    def Xform "CrateB" (
+        prepend references = @./props/crate.usda@
+    )
+    {
+        double3 xformOp:translate = (2, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+    }
+
+    def Xform "CrateC" (
+        prepend payload = @./props/crate.usda@
+    )
+    {
+        double3 xformOp:translate = (4, 0, 0)
+        uniform token[] xformOpOrder = ["xformOp:translate"]
+    }
+}
+
