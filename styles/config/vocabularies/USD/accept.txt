@@ -11,4 +11,5 @@ USD Scene Inspector
 usda
 Xform
 Args
+argv
 [a-z][a-z0-9]*(?:_[a-z0-9]+)+
