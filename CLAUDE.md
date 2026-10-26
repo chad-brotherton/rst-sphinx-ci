@@ -41,8 +41,8 @@ or commit messages) until it actually works.
   - Vale style linting of `docs/source`, `README.md`, `src`, and `scripts`, with spelling errors failing the build
   - `pytest`
 - [x] A demonstration pull request shows the Vale check failing on a deliberate typo, then passing after the fix.
-- [ ] Merges to `main` publish the built site to GitHub Pages.
-- [ ] `main` is protected: changes arrive by pull request with passing checks.
+- [x] Merges to `main` publish the built site to GitHub Pages.
+- [x] `main` is protected: changes arrive by pull request with passing checks.
 - [ ] Stretch: `scripts/build_llms_txt.py` generates `llms.txt` and `llms-full.txt` from the built site.
 - [ ] Stretch: `evals/` holds question-and-answer pairs, plus a script that checks an LLM's answers against the
       docs.
@@ -140,11 +140,15 @@ Update this section as work lands.
 - GitHub Pages is enabled with GitHub Actions as the source.
 - CI (merged): `.github/workflows/docs.yml` runs pytest (Python 3.11 with `usd-core` 26.5, and Python 3.14), HTML
   and doctest builds with `-W`, Vale, and linkcheck on pull requests. Vale checks `docs/source`, `README.md`, `src`,
-  and `scripts`. Pushes to `main` deploy to Pages; that job hasn't run yet because nothing has been released.
+  and `scripts`. Vale runs only on pull requests, so it's skipped on pushes to `main`.
 - Typo-gate demo: PR #5 (closed, not merged). Run 40397524451 failed only the Vale job on "enviroment"; run
   40397802241 passed after the fix. The `feature/typo-gate-demo` branch is kept for the record.
-- Next: a release PR from `develop` into `main` to publish the site, then branch protection for `main`, then the
-  `usd_inspect` features.
+- First release (PR #7, merged): run 40409133549 deployed the site to
+  https://chad-brotherton.github.io/rst-sphinx-ci/.
+- Branch protection on `main`: pull requests required (0 approvals), required checks are both `tests` jobs, `docs`,
+  and `vale`; rules apply to admins; force pushes and deletion blocked; `strict` is off. `develop` is unprotected.
+- Next: `feature/inspect-api` (library functions, tests, quick start doctests), then `feature/cli`, then
+  `feature/content-pages`, then a release.
 
 Decisions made so far:
 
