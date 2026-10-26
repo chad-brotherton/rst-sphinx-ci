@@ -38,8 +38,9 @@ or commit messages) until it actually works.
   - `sphinx-build -W` (warnings fail the build)
   - `make doctest`
   - `make linkcheck`
-  - Vale style linting
+  - Vale style linting of `docs/source`, `README.md`, `src`, and `scripts`, with spelling errors failing the build
   - `pytest`
+- [ ] A demonstration pull request shows the Vale check failing on a deliberate typo, then passing after the fix.
 - [ ] Merges to `main` publish the built site to GitHub Pages.
 - [ ] `main` is protected: changes arrive by pull request with passing checks.
 - [ ] Stretch: `scripts/build_llms_txt.py` generates `llms.txt` and `llms-full.txt` from the built site.
@@ -114,7 +115,8 @@ python scripts/make_scenes.py            # regenerate test scenes
 sphinx-build -W -b html docs/source docs/build/html
 sphinx-build -b doctest docs/source docs/build/doctest
 sphinx-build -b linkcheck docs/source docs/build/linkcheck
-vale docs/source
+vale sync                                # once: download the Google style into styles/
+vale docs/source README.md src scripts
 pytest
 ```
 
@@ -126,21 +128,25 @@ Update this section as work lands.
 - MIT license added. `.gitignore` covers `docs/build/`, `.DS_Store`, `*.egg-info/`, and `.pytest_cache/`.
 - `pyproject.toml` defines the package (`requires-python >= 3.11`, `usd-core >= 26.5`) and the `docs` and `test`
   extras. `src/usd_inspect/` is a stub with only `__version__`.
-- Sphinx scaffold on `feature/sphinx-scaffold`: `pydata-sphinx-theme`, autodoc, napoleon, doctest, intersphinx,
-  viewcode, and copybutton. `SCENES` is defined in `doctest_global_setup`. Stub pages exist for every docs section
-  in the definition of done. HTML (`-W`), doctest (0 tests), and linkcheck builds pass.
-- Test scenes on `feature/scenes`: `scripts/make_scenes.py` writes `simple.usda`, `props/crate.usda`,
-  `layout.usda` (all arcs resolve), and `broken_layout.usda` (one missing reference, one missing payload). Output is
-  deterministic. `tests/test_scenes.py` fails if a committed scene differs from a fresh run.
-- `Usd.Stage.GetCompositionErrors()` reports the broken arcs (verified on `usd-core` 26.11; not yet checked against the
-  26.5 floor).
-- Next: the CI workflow, or the `usd_inspect` features.
+- Sphinx scaffold (merged): `pydata-sphinx-theme`, autodoc, napoleon, doctest, intersphinx, viewcode, copybutton,
+  and `sphinx-design`. `SCENES` is defined in `doctest_global_setup`. Stub pages exist for every docs section in the
+  definition of done; the installation page has real content with a note and platform tabs.
+- Docs navigation (merged): `_templates/sidebar-nav-full.html` shows the full table of contents in the left sidebar
+  on every page; the top navbar no longer lists pages.
+- Test scenes (merged): `scripts/make_scenes.py` writes `simple.usda`, `props/crate.usda`, `layout.usda` (all arcs
+  resolve), and `broken_layout.usda` (one missing reference, one missing payload). Output is deterministic.
+  `tests/test_scenes.py` fails if a committed scene differs from a fresh run.
+- `Usd.Stage.GetCompositionErrors()` reports the broken arcs (verified on `usd-core` 26.11; CI checks the 26.5 floor).
+- GitHub Pages is enabled with GitHub Actions as the source.
+- In progress on `feature/ci`: Vale config and the `docs.yml` workflow.
+- Next: the typo-gate demonstration PR, then branch protection for `main`, then the `usd_inspect` features.
 
 Decisions made so far:
 
 - Theme: `pydata-sphinx-theme`, the open-source base of the reference project's theme. Don't use the vendor's own
   theme package; its license restricts it to the vendor's products.
-- Vale: the `Google` style plus a custom vocabulary for USD terms.
+- Vale: the `Vale` and `Google` styles plus a custom vocabulary for USD terms. `Vale.Spelling` is the typo gate; no
+  separate spell checker. `Vale.Terms` is off for `.py` files because docstrings mention `.usd` and `usd-core`.
 - Linkcheck: non-blocking on pull requests, plus a weekly scheduled run that must pass.
 - Branch protection: protect `main` only. The maintainer runs the `gh api` command, which Claude drafts after the CI
   job names exist.
