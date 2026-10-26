@@ -25,6 +25,9 @@ docs = [
     "pydata-sphinx-theme>=0.16",
     "sphinx-copybutton>=0.5",
     "sphinx-design>=0.6",
+    # scripts/build_llms_txt.py converts the built HTML to Markdown.
+    "beautifulsoup4>=4.12",
+    "markdownify>=1.2",
 ]
 test = [
     "pytest>=8",
@@ -35,3 +38,7 @@ version = { attr = "usd_inspect.__version__" }
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+filterwarnings = [
+    # Raised inside Sphinx's own napoleon extension when tests build the docs.
+    "ignore:The mapping interface for autodoc options objects is deprecated",
+]
