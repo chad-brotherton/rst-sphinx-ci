@@ -170,8 +170,13 @@ Update this section as work lands.
   `claude-sonnet-5-5` grade `correct` and `grounded` against the reference with a JSON schema. The baseline on
   2026-10-26 (docs sha `c618fdbde86d`) scored 28/28 correct and 27/28 grounded; the no-docs control scored 11/28 and
   5/28. Measured cost: $0.58 baseline, $0.35 control. Results are in `evals/runs/`; `tests/test_evals.py` covers the
-  runner offline with a fake client. Pipeline-page numbers are from that run: update them if you rerun.
-- Next: a release PR to publish the evals section. Every item in the definition of done is complete.
+  runner offline with a fake client.
+- Evals releases: PR #15 published the evals section. PR #16/#17 added a CLI page sentence saying that combining
+  `--check` and `--prim` exits with status 2, the gap behind the one ungrounded answer.
+- Eval rerun `after-exit-status` (docs sha `38a4689fab89`, commit `f1cbc66`): 28/28 correct, 28/28 grounded, $0.59.
+  Only `cli-combine-options` changed, and its answer quotes the new sentence. The pipeline page's table shows all three
+  runs: update it whenever you commit a new run.
+- Every item in the definition of done is complete. Next: a release PR to publish the rerun results.
 
 Decisions made so far:
 

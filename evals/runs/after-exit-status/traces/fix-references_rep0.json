@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files.\n\nAnswer using only the documentation below. If the documentation doesn't answer the question, say that it doesn't, instead of guessing. Keep answers short: a few sentences, plus a command or code sample when it helps.\n\n[documentation: llms-full.txt]"
+  },
+  {
+    "role": "user",
+    "content": "Can usd-inspect fix a broken reference for me, for example by pointing it at the right file?"
+  },
+  {
+    "role": "assistant",
+    "content": "No. The documentation describes no way to fix or edit a scene. `usd-inspect` only reads a scene: it lists prims, lists a prim's authored attributes, and finds references and payloads whose files are missing.\n\nIt can show you what needs fixing. `--check` lists each broken arc with its prim path, arc type, and asset path as written in the scene:\n\n```console\n$ usd-inspect examples/scenes/broken_layout.usda --check\n/World/MissingCrate    reference  ./props/missing_crate.usda\n/World/MissingPayload  payload    ./props/missing_payload.usda\n```\n\nIn Python, `find_missing_assets()` returns the same information as `MissingAsset` objects with `prim_path`, `arc`, and `asset_path` fields. You would have to correct the paths with another tool."
+  }
+]

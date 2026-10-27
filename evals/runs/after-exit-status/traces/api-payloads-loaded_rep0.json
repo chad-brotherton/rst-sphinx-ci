@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files.\n\nAnswer using only the documentation below. If the documentation doesn't answer the question, say that it doesn't, instead of guessing. Keep answers short: a few sentences, plus a command or code sample when it helps.\n\n[documentation: llms-full.txt]"
+  },
+  {
+    "role": "user",
+    "content": "Does open_stage load payloads, or leave them unloaded?"
+  },
+  {
+    "role": "assistant",
+    "content": "`open_stage()` loads all payloads. The API reference says it returns \"the opened stage, with all payloads loaded,\" and the glossary entry for payload says the same.\n\nThat's also why `find_missing_assets()` can report a payload whose file is missing, like `/World/MissingPayload` in `broken_layout.usda`:\n\n```pycon\n>>> from usd_inspect import open_stage, find_missing_assets\n>>> stage = open_stage(SCENES / \"broken_layout.usda\")\n>>> for missing in find_missing_assets(stage):\n...     print(missing.prim_path, missing.arc, missing.asset_path)\n/World/MissingCrate reference ./props/missing_crate.usda\n/World/MissingPayload payload ./props/missing_payload.usda\n```\n\nThe docs don't describe a way to open a stage with payloads left unloaded."
+  }
+]

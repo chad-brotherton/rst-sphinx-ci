@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files.\n\nAnswer using only the documentation below. If the documentation doesn't answer the question, say that it doesn't, instead of guessing. Keep answers short: a few sentences, plus a command or code sample when it helps.\n\n[documentation: llms-full.txt]"
+  },
+  {
+    "role": "user",
+    "content": "Which test scene has broken references, and what exactly is broken?"
+  },
+  {
+    "role": "assistant",
+    "content": "The broken scene is `examples/scenes/broken_layout.usda`. It has one prim that resolves and two whose target files don't exist:\n\n- `/World/CrateA` references `./props/crate.usda`, which exists.\n- `/World/MissingCrate` references `./props/missing_crate.usda`, which is missing.\n- `/World/MissingPayload` loads `./props/missing_payload.usda` as a payload, which is missing.\n\nUSD still opens the scene. It prints a warning for each missing file and composes those two prims without the missing content.\n\nTo see the report, run this from the repository root:\n\n```console\n$ usd-inspect examples/scenes/broken_layout.usda --check\n/World/MissingCrate    reference  ./props/missing_crate.usda\n/World/MissingPayload  payload    ./props/missing_payload.usda\n```\n\nThe command exits with status 1 because it found missing files."
+  }
+]

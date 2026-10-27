@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files.\n\nAnswer using only the documentation below. If the documentation doesn't answer the question, say that it doesn't, instead of guessing. Keep answers short: a few sentences, plus a command or code sample when it helps.\n\n[documentation: llms-full.txt]"
+  },
+  {
+    "role": "user",
+    "content": "Can I install it on Windows? Is anything different from macOS?"
+  },
+  {
+    "role": "assistant",
+    "content": "Yes. You need Python 3.11 or later. USD Scene Inspector depends on Pixar's `usd-core`, which publishes wheels for Python 3.11 through 3.14 on Windows, macOS, and Linux.\n\nCloning the repository and running `pip install -e .` are the same on both. Only creating and activating the virtual environment differs.\n\n**Windows (PowerShell):**\n\n```powershell\ngit clone https://github.com/chad-brotherton/rst-sphinx-ci.git\ncd rst-sphinx-ci\npy -m venv .venv\n.venv\\Scripts\\Activate.ps1\npip install -e .\n```\n\n**macOS:**\n\n```bash\npython3 -m venv .venv\nsource .venv/bin/activate\npip install -e .\n```\n\nOn Windows you create the environment with `py` instead of `python3`, and activate it with `.venv\\Scripts\\Activate.ps1` instead of `source .venv/bin/activate`."
+  }
+]

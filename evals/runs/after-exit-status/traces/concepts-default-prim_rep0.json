@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files.\n\nAnswer using only the documentation below. If the documentation doesn't answer the question, say that it doesn't, instead of guessing. Keep answers short: a few sentences, plus a command or code sample when it helps.\n\n[documentation: llms-full.txt]"
+  },
+  {
+    "role": "user",
+    "content": "What is a default prim, and why does it matter?"
+  },
+  {
+    "role": "assistant",
+    "content": "A **default prim** is the prim that a layer names as its entry point. When another file references that layer **without naming a prim**, USD uses the default prim.\n\nIt matters because it lets other scenes reference a file by its path alone. In the test scenes, `props/crate.usda` sets `Crate` as its default prim:\n\n```usda\n#usda 1.0\n(\n    defaultPrim = \"Crate\"\n)\n```\n\nSo `layout.usda` can reference the file without naming a prim:\n\n```usda\ndef Xform \"CrateA\" (\n    prepend references = @./props/crate.usda@\n)\n```\n\nIn Python, you can read a stage's default prim with the stage that `open_stage()` returns:\n\n```pycon\n>>> stage = open_stage(SCENES / \"simple.usda\")\n>>> stage.GetDefaultPrim().GetPath()\nSdf.Path('/World')\n```"
+  }
+]

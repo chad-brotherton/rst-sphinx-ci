@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files.\n\nAnswer using only the documentation below. If the documentation doesn't answer the question, say that it doesn't, instead of guessing. Keep answers short: a few sentences, plus a command or code sample when it helps.\n\n[documentation: llms-full.txt]"
+  },
+  {
+    "role": "user",
+    "content": "What happens if I call open_stage on a file that doesn't exist?"
+  },
+  {
+    "role": "assistant",
+    "content": "`open_stage()` raises a `FileNotFoundError` if the path doesn't exist:\n\n```python\n>>> from usd_inspect import open_stage\n>>> open_stage(\"does_not_exist.usda\")  # raises FileNotFoundError\n```\n\nIf the file exists but USD can't read it, `open_stage()` raises a `ValueError` instead.\n\nOn the command line, `usd-inspect` exits with status 2 when the file doesn't exist or isn't a USD file."
+  }
+]

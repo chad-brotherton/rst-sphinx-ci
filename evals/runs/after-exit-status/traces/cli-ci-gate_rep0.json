@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files.\n\nAnswer using only the documentation below. If the documentation doesn't answer the question, say that it doesn't, instead of guessing. Keep answers short: a few sentences, plus a command or code sample when it helps.\n\n[documentation: llms-full.txt]"
+  },
+  {
+    "role": "user",
+    "content": "How can I make a CI job fail when a scene has a broken reference?"
+  },
+  {
+    "role": "assistant",
+    "content": "Run `usd-inspect` with `--check` as a step in your CI job. It exits with status 1 when a reference or payload points to a missing file, which fails the step in most CI systems:\n\n```console\n$ usd-inspect path/to/scene.usda --check\n```\n\nThe exit statuses are:\n\n- **0:** no missing files. The command prints `No missing files.`\n- **1:** at least one missing file. Each one is listed with its prim path, arc type, and asset path.\n- **2:** invalid arguments, or the file doesn't exist or isn't a USD file.\n\nTo check from Python instead, `find_missing_assets(stage)` returns an empty list when every file is found.\n\n`--check` only verifies that the files named by references and payloads exist. It won't catch missing sublayers, missing files named in attributes (such as textures), or a reference whose file exists but doesn't contain the prim it names."
+  }
+]
