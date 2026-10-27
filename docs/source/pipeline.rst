@@ -217,21 +217,27 @@ knows.
    * - Run
      - ``correct``
      - ``grounded``
-   * - With the docs
+   * - First run, with the docs
      - 28 of 28
      - 27 of 28
-   * - Without the docs
+   * - First run, without the docs
      - 11 of 28
      - 5 of 28
+   * - After the command-line page fix
+     - 28 of 28
+     - 28 of 28
 
-These results are from the October 26, 2026 run, with ``claude-opus-5-5`` as
-the model under test and ``claude-sonnet-5-5`` as the judge. Without the docs,
-the model still answered general USD questions, but it couldn't answer
-questions only these docs answer, such as the exit status of ``--check``.
+All three runs are from October 26, 2026, with ``claude-opus-5-5`` as the
+model under test and ``claude-sonnet-5-5`` as the judge. Without the docs, the
+model still answered general USD questions, but it couldn't answer questions
+only these docs answer, such as the exit status of ``--check``.
 
-The one ungrounded answer said that passing both ``--check`` and ``--prim``
-exits with status 2. That's true, but at the time the docs only implied it.
-The :doc:`cli` page now says so.
+In the first run, the one ungrounded answer said that passing both ``--check``
+and ``--prim`` exits with status 2. That was true, but the docs only implied
+it. After a sentence saying so was added to the :doc:`cli` page, a rerun scored
+28 of 28 on both results, and that answer quoted the new sentence. The other
+27 grades didn't change. That's the loop the evals are for: find a gap, fix the
+docs, and run the evals again to confirm the fix.
 
 The evals call the Claude API, so they need an API key and don't run in CI.
 Run them after a docs change to check that the docs still answer what they

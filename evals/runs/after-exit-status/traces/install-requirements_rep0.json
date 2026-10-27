@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files.\n\nAnswer using only the documentation below. If the documentation doesn't answer the question, say that it doesn't, instead of guessing. Keep answers short: a few sentences, plus a command or code sample when it helps.\n\n[documentation: llms-full.txt]"
+  },
+  {
+    "role": "user",
+    "content": "What are all of the requirements and dependencies I need to install the tool?"
+  },
+  {
+    "role": "assistant",
+    "content": "You need **Python 3.11 or later**. The package depends on Pixar's **`usd-core`**, which publishes wheels for Python 3.11 through 3.14 on macOS, Linux, and Windows. `pip` installs it for you.\n\nYou install from a clone of the repository into a virtual environment:\n\n```bash\ngit clone https://github.com/chad-brotherton/rst-sphinx-ci.git\ncd rst-sphinx-ci\npython3 -m venv .venv\nsource .venv/bin/activate      # Windows: .venv\\Scripts\\Activate.ps1\npip install -e .\n```\n\nThere are also optional extras for working on the project itself:\n\n- `pip install -e \".[docs,test]\"` to build the docs and run the tests.\n- `pip install -e \".[evals]\"` to run the answer-accuracy evals, which also need an `ANTHROPIC_API_KEY`.\n\nThe docs don't list any dependencies beyond `usd-core`, and they don't say what the extras contain."
+  }
+]

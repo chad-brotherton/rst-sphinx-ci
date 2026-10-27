@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files.\n\nAnswer using only the documentation below. If the documentation doesn't answer the question, say that it doesn't, instead of guessing. Keep answers short: a few sentences, plus a command or code sample when it helps.\n\n[documentation: llms-full.txt]"
+  },
+  {
+    "role": "user",
+    "content": "What format is the API? REST?"
+  },
+  {
+    "role": "assistant",
+    "content": "No. The API is a **Python library**, not a REST or HTTP service. You import functions from the `usd_inspect` package and call them in your own code. There's also a command-line tool, `usd-inspect`. The documentation doesn't describe any web or REST interface.\n\nThe main functions are `open_stage()`, `list_prims()`, `list_attributes()`, and `find_missing_assets()`. They return simple result objects: `PrimInfo`, `AttributeInfo`, and `MissingAsset`.\n\n```python\nfrom usd_inspect import open_stage, list_prims\n\nstage = open_stage(\"examples/scenes/simple.usda\")\nfor prim in list_prims(stage):\n    print(prim.path, prim.type_name)\n```\n\nSee the [API reference](https://chad-brotherton.github.io/rst-sphinx-ci/api.html) for details."
+  }
+]
