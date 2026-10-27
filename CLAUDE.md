@@ -148,7 +148,8 @@ Update this section as work lands.
 - First release (PR #7, merged): run 40409133549 deployed the site to
   https://chad-brotherton.github.io/rst-sphinx-ci/.
 - Branch protection on `main`: pull requests required (0 approvals), required checks are both `tests` jobs, `docs`,
-  and `vale`; rules apply to admins; force pushes and deletion blocked; `strict` is off. `develop` is unprotected.
+  and `vale`; signed commits required; rules apply to admins; force pushes and deletion blocked; `strict` is off.
+  `develop` is unprotected. Rebase merges into `main` aren't possible with signed commits required; use merge commits.
 - Scene API (PR #8, merged): `usd_inspect/scene.py` has `open_stage`, `list_prims`, `list_attributes` (authored
   attributes only), and `find_missing_assets`, which resolves each reference and payload asset path relative to its
   layer with `Ar`. The quick start page has real content with doctests.
@@ -176,7 +177,7 @@ Update this section as work lands.
 - Eval rerun `after-exit-status` (docs sha `38a4689fab89`, commit `f1cbc66`): 28/28 correct, 28/28 grounded, $0.59.
   Only `cli-combine-options` changed, and its answer quotes the new sentence. The pipeline page's table shows all three
   runs: update it whenever you commit a new run.
-- Every item in the definition of done is complete. Next: a release PR to publish the rerun results.
+- Every item in the definition of done is complete. The rerun results are released (PR #19) and show on the live site.
 
 Decisions made so far:
 
