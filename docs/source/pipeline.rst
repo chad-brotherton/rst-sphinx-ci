@@ -230,7 +230,8 @@ the model still answered general USD questions, but it couldn't answer
 questions only these docs answer, such as the exit status of ``--check``.
 
 The one ungrounded answer said that passing both ``--check`` and ``--prim``
-exits with status 2. That's true, but the docs only imply it.
+exits with status 2. That's true, but at the time the docs only implied it.
+The :doc:`cli` page now says so.
 
 The evals call the Claude API, so they need an API key and don't run in CI.
 Run them after a docs change to check that the docs still answer what they
