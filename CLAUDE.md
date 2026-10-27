@@ -176,7 +176,7 @@ Update this section as work lands.
 - Eval rerun `after-exit-status` (docs sha `38a4689fab89`, commit `f1cbc66`): 28/28 correct, 28/28 grounded, $0.59.
   Only `cli-combine-options` changed, and its answer quotes the new sentence. The pipeline page's table shows all three
   runs: update it whenever you commit a new run.
-- Every item in the definition of done is complete. Next: a release PR to publish the rerun results.
+- Every item in the definition of done is complete. The rerun results are released (PR #19) and show on the live site.
 
 Decisions made so far:
 
