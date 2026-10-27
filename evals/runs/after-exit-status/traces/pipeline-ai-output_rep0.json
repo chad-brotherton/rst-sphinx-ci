@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files.\n\nAnswer using only the documentation below. If the documentation doesn't answer the question, say that it doesn't, instead of guessing. Keep answers short: a few sentences, plus a command or code sample when it helps.\n\n[documentation: llms-full.txt]"
+  },
+  {
+    "role": "user",
+    "content": "Is there a version of these docs I can give to an AI assistant?"
+  },
+  {
+    "role": "assistant",
+    "content": "Yes. Each release publishes the docs in plain-text forms that AI tools can read without parsing HTML:\n\n- **`llms.txt`** is an index of the docs in the [llmstxt.org](https://llmstxt.org/) format. It has the project name, a one-line summary, and a link to each page, grouped by table-of-contents section.\n- **`PAGE.html.md`** is a Markdown copy of each page, such as `overview.html.md`. The links in `llms.txt` point to these copies.\n- **`llms-full.txt`** has every page's Markdown in one file, in table-of-contents order. This is the easiest one to hand to an assistant in a single step.\n\nThe index is at `https://chad-brotherton.github.io/rst-sphinx-ci/llms.txt`.\n\nTo generate the files locally, build the HTML first and then run the script:\n\n```console\n$ sphinx-build -W -b html docs/source docs/build/html\n$ python scripts/build_llms_txt.py\n```"
+  }
+]

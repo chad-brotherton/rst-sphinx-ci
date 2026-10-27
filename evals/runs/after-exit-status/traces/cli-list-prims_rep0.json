@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files.\n\nAnswer using only the documentation below. If the documentation doesn't answer the question, say that it doesn't, instead of guessing. Keep answers short: a few sentences, plus a command or code sample when it helps.\n\n[documentation: llms-full.txt]"
+  },
+  {
+    "role": "user",
+    "content": "How do I list every prim in a scene from the command line?"
+  },
+  {
+    "role": "assistant",
+    "content": "Pass the scene file to `usd-inspect` with no other options. It prints each prim's path and schema type:\n\n```console\n$ usd-inspect examples/scenes/simple.usda\n/World       Xform\n/World/Box   Cube\n/World/Ball  Sphere\n```\n\nThe Python equivalent is `usd_inspect.list_prims(stage)`."
+  }
+]

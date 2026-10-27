@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files.\n\nAnswer using only the documentation below. If the documentation doesn't answer the question, say that it doesn't, instead of guessing. Keep answers short: a few sentences, plus a command or code sample when it helps.\n\n[documentation: llms-full.txt]"
+  },
+  {
+    "role": "user",
+    "content": "Why doesn't list_attributes show my sphere's visibility attribute?"
+  },
+  {
+    "role": "assistant",
+    "content": "`list_attributes()` only returns **authored** attributes, meaning ones written in a layer of the scene. A sphere's `visibility` that you never set still has a value, the fallback from the `Sphere` schema type, but it isn't authored, so it's left out. The Quick start uses this exact case: \"Attributes that keep their schema default, such as a sphere's `visibility`, don't [appear].\"\n\nFor example, `/World/Ball` in `simple.usda` only shows what the file writes:\n\n```pycon\n>>> for attr in list_attributes(stage, \"/World/Ball\"):\n...     print(attr.name, attr.value)\nradius 1.0\nuserProperties:label bouncy ball\nxformOp:translate (3, 0, 1)\nxformOpOrder [xformOp:translate]\n```\n\nThe command line works the same way: `usd-inspect FILE --prim PATH` also hides attributes that keep their schema default.\n\nIf `visibility` were written in the scene, it would appear in the list. The docs don't describe a way to have USD Scene Inspector list unauthored attributes or their fallback values."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files.\n\nAnswer using only the documentation below. If the documentation doesn't answer the question, say that it doesn't, instead of guessing. Keep answers short: a few sentences, plus a command or code sample when it helps.\n\n[documentation: llms-full.txt]"
+  },
+  {
+    "role": "user",
+    "content": "A reference uses the path ./props/crate.usda. What is that path relative to?"
+  },
+  {
+    "role": "assistant",
+    "content": "It's relative to the **layer that contains it**, meaning the `.usda` file where the reference is written. It is not relative to your current folder.\n\nFor example, in `examples/scenes/layout.usda`, `@./props/crate.usda@` resolves to `examples/scenes/props/crate.usda`, wherever you run the command from.\n\n`find_missing_assets()` and `usd-inspect --check` resolve asset paths the same way USD does when it composes the stage. In their results, `asset_path` shows the path as it's written in the scene (for example, `./props/missing_crate.usda`), not the resolved path."
+  }
+]

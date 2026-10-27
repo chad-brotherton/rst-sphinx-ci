@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files.\n\nAnswer using only the documentation below. If the documentation doesn't answer the question, say that it doesn't, instead of guessing. Keep answers short: a few sentences, plus a command or code sample when it helps.\n\n[documentation: llms-full.txt]"
+  },
+  {
+    "role": "user",
+    "content": "What's the minimum version of usd-core I need?"
+  },
+  {
+    "role": "assistant",
+    "content": "The documentation doesn't give a minimum `usd-core` version. It does say:\n\n- USD Scene Inspector needs **Python 3.11 or later**, and `usd-core` publishes wheels for Python 3.11 through 3.14 on macOS, Linux, and Windows.\n- CI runs the tests on Python 3.11 with the **oldest supported `usd-core`** and on Python 3.14 with the latest, but the docs don't name that oldest version.\n\nThe repository's package metadata might list the version constraint, but that isn't in the documentation. When you install with `pip install -e .`, pip installs a compatible `usd-core` for you."
+  }
+]

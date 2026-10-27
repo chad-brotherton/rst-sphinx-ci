@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files.\n\nAnswer using only the documentation below. If the documentation doesn't answer the question, say that it doesn't, instead of guessing. Keep answers short: a few sentences, plus a command or code sample when it helps.\n\n[documentation: llms-full.txt]"
+  },
+  {
+    "role": "user",
+    "content": "Can usd-inspect print its results as JSON?"
+  },
+  {
+    "role": "assistant",
+    "content": "The documentation doesn't mention JSON output. The documented `usd-inspect` options are `file`, `--prim PATH`, `--check`, `--version`, and `-h`/`--help`, and the examples show only plain-text output.\n\nTo get the results as structured data, the Python API returns lists of objects with named fields: `PrimInfo` from `list_prims()`, `AttributeInfo` from `list_attributes()`, and `MissingAsset` from `find_missing_assets()`. The docs don't cover converting these to JSON. Note that `AttributeInfo.value` can be a `pxr` object rather than a plain Python value.\n\n```python\nfrom usd_inspect import open_stage, find_missing_assets\n\nstage = open_stage(\"examples/scenes/broken_layout.usda\")\nfor missing in find_missing_assets(stage):\n    print(missing.prim_path, missing.arc, missing.asset_path)\n```"
+  }
+]

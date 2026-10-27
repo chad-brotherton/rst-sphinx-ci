@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files.\n\nAnswer using only the documentation below. If the documentation doesn't answer the question, say that it doesn't, instead of guessing. Keep answers short: a few sentences, plus a command or code sample when it helps.\n\n[documentation: llms-full.txt]"
+  },
+  {
+    "role": "user",
+    "content": "How do you make sure the code examples in the docs still work?"
+  },
+  {
+    "role": "assistant",
+    "content": "Every example you might copy runs in CI, so none can silently go out of date:\n\n- **Python examples** on the Quick start page and in docstrings are doctests. `sphinx-build -b doctest` runs them and compares the output. They use `SCENES`, a path defined in `conf.py`, instead of hard-coded paths.\n- **Command-line examples** on the Command-line usage page can't be doctests. Instead, a pytest test reads each `console` block, runs the command, and fails if the output doesn't match the page.\n- **Scene listings** on the Test scenes page are included directly from the generated files, so they can't drift from the scenes.\n\nThe `docs` job, which runs the doctests, and the `tests` job, which runs pytest, run on every pull request into `develop` or `main`. Both must pass before the pull request can merge.\n\nTo run the same checks locally:\n\n```console\n$ pip install -e \".[docs,test]\"\n$ sphinx-build -b doctest docs/source docs/build/doctest\n$ pytest\n```"
+  }
+]

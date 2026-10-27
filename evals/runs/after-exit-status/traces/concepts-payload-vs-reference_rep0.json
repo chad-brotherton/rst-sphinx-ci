@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files.\n\nAnswer using only the documentation below. If the documentation doesn't answer the question, say that it doesn't, instead of guessing. Keep answers short: a few sentences, plus a command or code sample when it helps.\n\n[documentation: llms-full.txt]"
+  },
+  {
+    "role": "user",
+    "content": "What's the difference between a reference and a payload?"
+  },
+  {
+    "role": "assistant",
+    "content": "Both are [composition arcs](https://chad-brotherton.github.io/rst-sphinx-ci/glossary.html#term-composition-arc) that bring content from another file into a prim. The difference is whether you can skip loading it:\n\n- **Reference:** Brings a prim from another layer into the scene, at the location of the prim that has the reference.\n- **Payload:** Works like a reference, but you can leave it unloaded. This lets you open a large scene without reading every file it points to.\n\nFor USD Scene Inspector, the difference mostly doesn't matter:\n\n- [`open_stage()`](https://chad-brotherton.github.io/rst-sphinx-ci/api.html#usd_inspect.open_stage) loads all payloads.\n- `--check` and [`find_missing_assets()`](https://chad-brotherton.github.io/rst-sphinx-ci/api.html#usd_inspect.find_missing_assets) check both kinds and label each result `reference` or `payload`:\n\n```console\n$ usd-inspect examples/scenes/broken_layout.usda --check\n/World/MissingCrate    reference  ./props/missing_crate.usda\n/World/MissingPayload  payload    ./props/missing_payload.usda\n```"
+  }
+]
