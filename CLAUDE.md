@@ -148,7 +148,8 @@ Update this section as work lands.
 - First release (PR #7, merged): run 40409133549 deployed the site to
   https://chad-brotherton.github.io/rst-sphinx-ci/.
 - Branch protection on `main`: pull requests required (0 approvals), required checks are both `tests` jobs, `docs`,
-  and `vale`; rules apply to admins; force pushes and deletion blocked; `strict` is off. `develop` is unprotected.
+  and `vale`; signed commits required; rules apply to admins; force pushes and deletion blocked; `strict` is off.
+  `develop` is unprotected. Rebase merges into `main` aren't possible with signed commits required; use merge commits.
 - Scene API (PR #8, merged): `usd_inspect/scene.py` has `open_stage`, `list_prims`, `list_attributes` (authored
   attributes only), and `find_missing_assets`, which resolves each reference and payload asset path relative to its
   layer with `Ar`. The quick start page has real content with doctests.
