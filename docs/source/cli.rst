@@ -97,7 +97,8 @@ Options
 
 ``--check``
    List references and payloads whose files are missing. You can't combine
-   ``--check`` with ``--prim``.
+   ``--check`` with ``--prim``. If you pass both, ``usd-inspect`` prints an
+   error and exits with status 2.
 
 ``--version``
    Print the version and exit.
