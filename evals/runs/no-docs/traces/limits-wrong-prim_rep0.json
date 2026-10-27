@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files. If you don't know the answer, say so instead of guessing. Keep answers short."
+  },
+  {
+    "role": "user",
+    "content": "My reference points to a file that exists, but the prim it names isn't in that file. Will usd-inspect report it?"
+  },
+  {
+    "role": "assistant",
+    "content": "I don't know. I don't have reliable details on whether usd-inspect checks that a referenced prim path actually exists in the target layer, or only that the file resolves.\n\nFor context, USD itself treats this as a composition error (an unresolved prim path in the reference). It's reported separately from a missing file, so a tool can catch one case without the other.\n\nTo find out for your version:\n- Check `usd-inspect --help` or the docs for validation or composition-error options.\n- Test it on a small file with a reference to a nonexistent prim and see whether it's flagged.\n- As a cross-check, run `usdchecker` or call `stage.GetCompositionErrors()` in Python on the same file. Either one will surface the unresolved prim path."
+  }
+]

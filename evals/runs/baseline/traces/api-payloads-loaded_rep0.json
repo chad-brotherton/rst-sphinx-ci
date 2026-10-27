@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files.\n\nAnswer using only the documentation below. If the documentation doesn't answer the question, say that it doesn't, instead of guessing. Keep answers short: a few sentences, plus a command or code sample when it helps.\n\n[documentation: llms-full.txt]"
+  },
+  {
+    "role": "user",
+    "content": "Does open_stage load payloads, or leave them unloaded?"
+  },
+  {
+    "role": "assistant",
+    "content": "`open_stage()` loads all payloads. Its documented return value is \"the opened stage, with all payloads loaded,\" and the glossary entry for payload says the same.\n\n```python\n>>> from usd_inspect import open_stage\n>>> stage = open_stage(SCENES / \"layout.usda\")  # CrateC's payload is loaded\n```\n\nThe documentation doesn't describe any option to open a stage with payloads unloaded."
+  }
+]

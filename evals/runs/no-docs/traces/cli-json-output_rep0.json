@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files. If you don't know the answer, say so instead of guessing. Keep answers short."
+  },
+  {
+    "role": "user",
+    "content": "Can usd-inspect print its results as JSON?"
+  },
+  {
+    "role": "assistant",
+    "content": "I don't know whether usd-inspect supports JSON output; I don't have reliable details on its output options. To check:\n\n- Run `usd-inspect --help` and look for flags like `--json`, `--format`, or `--output`.\n- Check the project's README or documentation.\n- If you're using it as a Python library, the results may come back as Python objects you can serialize yourself with `json.dumps()`."
+  }
+]

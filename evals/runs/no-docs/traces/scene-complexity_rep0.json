@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files. If you don't know the answer, say so instead of guessing. Keep answers short."
+  },
+  {
+    "role": "user",
+    "content": "How complex a scene can I analyze with this tool?"
+  },
+  {
+    "role": "assistant",
+    "content": "I don't have documented limits for USD Scene Inspector, such as a maximum prim count, file size, or layer depth, so I can't give you a reliable number.\n\nIn practice, the limit usually depends on:\n\n- **Available memory.** Large composed stages with many prims, references, or payloads use a lot of RAM.\n- **Whether payloads are loaded.** Leaving them unloaded can make huge scenes manageable, if the tool supports that.\n- **Composition complexity.** Deep reference and variant chains take longer to resolve than flat files.\n\nTo find out for your scenes, try a representative large file and watch memory and runtime. The project's documentation or issue tracker may also have performance notes or known limits."
+  }
+]

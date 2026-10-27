@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files.\n\nAnswer using only the documentation below. If the documentation doesn't answer the question, say that it doesn't, instead of guessing. Keep answers short: a few sentences, plus a command or code sample when it helps.\n\n[documentation: llms-full.txt]"
+  },
+  {
+    "role": "user",
+    "content": "Why doesn't list_attributes show my sphere's visibility attribute?"
+  },
+  {
+    "role": "assistant",
+    "content": "`list_attributes()` lists only **authored** attributes, the ones actually written in the scene file. Your sphere's `visibility` still has a value, but it's the fallback that the `Sphere` schema type defines, so it's left out.\n\nFor example, `simple.usda` authors `radius`, `userProperties:label`, `xformOp:translate`, and `xformOpOrder` on `/World/Ball`. Only those four appear:\n\n```pycon\n>>> for attr in list_attributes(stage, \"/World/Ball\"):\n...     print(attr.name, attr.value)\nradius 1.0\nuserProperties:label bouncy ball\nxformOp:translate (3, 0, 1)\nxformOpOrder [xformOp:translate]\n```\n\n`visibility` will appear once it's written in the scene. The `usd-inspect FILE --prim PATH` command works the same way. The documentation doesn't describe a way to list schema default values with USD Scene Inspector."
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files. If you don't know the answer, say so instead of guessing. Keep answers short."
+  },
+  {
+    "role": "user",
+    "content": "What's the minimum version of usd-core I need?"
+  },
+  {
+    "role": "assistant",
+    "content": "I don't know the exact minimum `usd-core` version USD Scene Inspector requires, and I'd rather not guess.\n\nTo find it, check:\n- **`pyproject.toml` or `setup.py`** in the project repo, under `dependencies` or `install_requires`\n- **The PyPI page** for the package, under \"Requires\"\n- **`pip show usd-scene-inspector`** after installing, which lists dependencies (though not always version bounds)\n\nIf you paste the dependency section here, I can help interpret it."
+  }
+]

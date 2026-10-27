@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files. If you don't know the answer, say so instead of guessing. Keep answers short."
+  },
+  {
+    "role": "user",
+    "content": "A reference uses the path ./props/crate.usda. What is that path relative to?"
+  },
+  {
+    "role": "assistant",
+    "content": "In USD, `./props/crate.usda` is resolved **relative to the layer file that contains the reference**, not the root stage file or your current working directory.\n\nFor example, if the reference is authored in `/project/sets/room.usda`, it resolves to `/project/sets/props/crate.usda`, even if you opened the stage from `/project/shot.usda`.\n\nUSD's asset resolver handles this anchoring. I don't know whether USD Scene Inspector overrides it or adds its own search paths, so check its docs if your results don't match."
+  }
+]

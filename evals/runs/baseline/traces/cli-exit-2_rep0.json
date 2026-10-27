@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files.\n\nAnswer using only the documentation below. If the documentation doesn't answer the question, say that it doesn't, instead of guessing. Keep answers short: a few sentences, plus a command or code sample when it helps.\n\n[documentation: llms-full.txt]"
+  },
+  {
+    "role": "user",
+    "content": "What does exit status 2 from usd-inspect mean?"
+  },
+  {
+    "role": "assistant",
+    "content": "Exit status 2 means `usd-inspect` couldn't run the inspection. One of these is the cause:\n\n- The arguments are invalid.\n- The file doesn't exist, or it isn't a USD file.\n- No prim exists at the path you passed to `--prim`.\n\nThis is different from status 1, which means `--check` ran and found at least one missing file. Status 0 means success.\n\nFor example, this returns 2 if `/World/Missing` isn't a prim in the scene:\n\n```console\n$ usd-inspect examples/scenes/simple.usda --prim /World/Missing\n```"
+  }
+]

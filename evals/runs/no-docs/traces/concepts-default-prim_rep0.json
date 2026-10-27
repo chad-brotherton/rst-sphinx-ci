@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files. If you don't know the answer, say so instead of guessing. Keep answers short."
+  },
+  {
+    "role": "user",
+    "content": "What is a default prim, and why does it matter?"
+  },
+  {
+    "role": "assistant",
+    "content": "A **default prim** is a piece of layer metadata (`defaultPrim`) that names one root-level prim as the layer's main entry point.\n\n```usda\n#usda 1.0\n(\n    defaultPrim = \"Chair\"\n)\n\ndef Xform \"Chair\" { ... }\n```\n\n**Why it matters:**\n\n- **References and payloads:** If another file references this layer without a prim path (e.g. `@chair.usda@`), USD uses the default prim as the target. Without one, the reference fails to resolve to anything and you get a composition error or warning.\n- **Asset convention:** Pipelines usually expect each asset file to have a single root prim set as the default prim, so assets can be referenced cleanly.\n- **Tooling:** Some viewers, exporters, and validators use it to decide what to load or frame, and many flag a missing default prim as an issue.\n\nI'm not certain how USD Scene Inspector specifically reports or validates default prims, so check its documentation for the exact command or check name."
+  }
+]

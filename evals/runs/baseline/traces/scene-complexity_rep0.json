@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files.\n\nAnswer using only the documentation below. If the documentation doesn't answer the question, say that it doesn't, instead of guessing. Keep answers short: a few sentences, plus a command or code sample when it helps.\n\n[documentation: llms-full.txt]"
+  },
+  {
+    "role": "user",
+    "content": "How complex a scene can I analyze with this tool?"
+  },
+  {
+    "role": "assistant",
+    "content": "The documentation doesn't give any limits on scene size or complexity, and it doesn't include performance figures. Here's what it does say about scope:\n\n- **File types:** It reads `.usda` and `.usd` files.\n- **Payloads:** `open_stage()` (and so the command-line tool) loads every payload when it opens a scene. A large scene that relies on payloads to avoid reading everything will be read in full.\n- **What `--check` covers:** It only checks the files named by references and payloads. It doesn't report:\n  - missing sublayers,\n  - file paths stored in attributes, such as textures,\n  - references whose file exists but doesn't contain the prim they name.\n- **What `list_prims()` covers:** It returns only active, defined prims.\n\nThe examples in the docs use only four small test scenes, so they don't show how the tool handles large or deeply nested scenes."
+  }
+]

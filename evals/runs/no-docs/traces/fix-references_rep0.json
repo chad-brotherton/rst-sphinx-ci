@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files. If you don't know the answer, say so instead of guessing. Keep answers short."
+  },
+  {
+    "role": "user",
+    "content": "Can usd-inspect fix a broken reference for me, for example by pointing it at the right file?"
+  },
+  {
+    "role": "assistant",
+    "content": "I don't know of any feature in USD Scene Inspector that rewrites references. As far as I know, it's an inspection tool: it reports problems like unresolved references but doesn't modify files. I can't confirm that for every version, so check `usd-inspect --help` or the docs for your release.\n\nTo repoint a reference yourself, you can use USD's own tooling:\n\n- **`usdedit`**: opens the layer as text so you can fix the asset path by hand.\n- **Python (`pxr` API)**:\n  ```python\n  from pxr import Usd, Sdf\n  stage = Usd.Stage.Open(\"scene.usda\")\n  prim = stage.GetPrimAtPath(\"/MyPrim\")\n  refs = prim.GetReferences()\n  refs.ClearReferences()\n  refs.AddReference(\"correct/path/asset.usd\")\n  stage.GetRootLayer().Save()\n  ```\n\nAfterwards, you could rerun usd-inspect to confirm the reference resolves."
+  }
+]

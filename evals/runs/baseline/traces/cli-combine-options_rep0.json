@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files.\n\nAnswer using only the documentation below. If the documentation doesn't answer the question, say that it doesn't, instead of guessing. Keep answers short: a few sentences, plus a command or code sample when it helps.\n\n[documentation: llms-full.txt]"
+  },
+  {
+    "role": "user",
+    "content": "Can I use --check and --prim in the same command?"
+  },
+  {
+    "role": "assistant",
+    "content": "No. The options list on the Command-line usage page says you can't combine `--check` with `--prim`. To do both, run two commands:\n\n```console\n$ usd-inspect examples/scenes/simple.usda --prim /World/Ball\n$ usd-inspect examples/scenes/simple.usda --check\n```\n\nIf you pass both anyway, the exit status table says invalid arguments return status 2. The docs don't show the exact error message."
+  }
+]

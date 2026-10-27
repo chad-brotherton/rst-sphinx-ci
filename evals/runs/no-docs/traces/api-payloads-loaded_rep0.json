@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files. If you don't know the answer, say so instead of guessing. Keep answers short."
+  },
+  {
+    "role": "user",
+    "content": "Does open_stage load payloads, or leave them unloaded?"
+  },
+  {
+    "role": "assistant",
+    "content": "I don't know how USD Scene Inspector's `open_stage` handles payloads, and I don't want to guess at its default.\n\nFor reference, plain USD's `Usd.Stage.Open()` loads all payloads by default (`Usd.Stage.LoadAll`). A wrapper could override that, though, so check the `open_stage` docstring or source for a load-policy parameter. You can also test it: open a stage with payloads and call `stage.GetLoadSet()`, or check `prim.IsLoaded()` on a payloaded prim."
+  }
+]

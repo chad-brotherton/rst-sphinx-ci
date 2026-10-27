@@ -1,0 +1,14 @@
+[
+  {
+    "role": "system",
+    "content": "You answer questions about USD Scene Inspector, a Python library and command-line tool for inspecting USD scene files. If you don't know the answer, say so instead of guessing. Keep answers short."
+  },
+  {
+    "role": "user",
+    "content": "Can I use --check and --prim in the same command?"
+  },
+  {
+    "role": "assistant",
+    "content": "I don't know whether this tool supports combining `--check` and `--prim`, and I don't want to guess about its flag behavior.\n\nTo find out:\n\n- Run `usd-scene-inspector --help` (or the tool's actual command name) to see whether the flags are documented as compatible.\n- Try the command on a test file. Many CLIs report an error if two flags conflict.\n- Check the project's README or docs for a section on combining options.\n\nIf you share the `--help` output, I can help interpret it."
+  }
+]
